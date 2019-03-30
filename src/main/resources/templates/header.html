@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header(title)">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <!-- Site Title   -->
+    <title th:text="'湖南紫澜生物科技有限公司 - '+${title}"></title>
+    <!-- Fav Icons   -->
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link th:href="@{~/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{~/css/bootstrap-dropdownhover.min.css}" rel="stylesheet">
+    <!-- Fonts Awesome -->
+    <link th:href="@{~/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href='https://fonts.loli.net/css?family=Raleway:400,200,300,100,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.loli.net/css?family=Poppins:300,400" rel="stylesheet">
+    <!-- animate Effect -->
+    <link th:href="@{~/css/animate.css}" rel="stylesheet">
+    <!-- Main CSS -->
+    <link th:href="@{~/css/style.css}" rel="stylesheet">
+    <!-- Responsive CSS -->
+    <link th:href="@{css/responsive.css}" rel="stylesheet">
+</head>
+
+</html>

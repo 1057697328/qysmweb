@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lightwing.mediweb.dao.MGoodtypeDao">
+  <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MGoodtype">
+    <id column="gtypeid" jdbcType="INTEGER" property="gtypeid" />
+    <result column="gtypename" jdbcType="VARCHAR" property="gtypename" />
+    <result column="gtypedesc" jdbcType="VARCHAR" property="gtypedesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    gtypeid, gtypename, gtypedesc
+  </sql>
+  <select id="selectByExample" parameterType="net.lightwing.mediweb.pojo.MGoodtypeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from m_goodtype
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from m_goodtype
+    where gtypeid = #{gtypeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from m_goodtype
+    where gtypeid = #{gtypeid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.lightwing.mediweb.pojo.MGoodtypeExample">
+    delete from m_goodtype
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="gtypeid" keyProperty="gtypeid" parameterType="net.lightwing.mediweb.pojo.MGoodtype" useGeneratedKeys="true">
+    insert into m_goodtype (gtypename, gtypedesc)
+    values (#{gtypename,jdbcType=VARCHAR}, #{gtypedesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="gtypeid" keyProperty="gtypeid" parameterType="net.lightwing.mediweb.pojo.MGoodtype" useGeneratedKeys="true">
+    insert into m_goodtype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gtypename != null">
+        gtypename,
+      </if>
+      <if test="gtypedesc != null">
+        gtypedesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gtypename != null">
+        #{gtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="gtypedesc != null">
+        #{gtypedesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.lightwing.mediweb.pojo.MGoodtypeExample" resultType="java.lang.Long">
+    select count(*) from m_goodtype
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update m_goodtype
+    <set>
+      <if test="record.gtypeid != null">
+        gtypeid = #{record.gtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.gtypename != null">
+        gtypename = #{record.gtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gtypedesc != null">
+        gtypedesc = #{record.gtypedesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update m_goodtype
+    set gtypeid = #{record.gtypeid,jdbcType=INTEGER},
+      gtypename = #{record.gtypename,jdbcType=VARCHAR},
+      gtypedesc = #{record.gtypedesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MGoodtype">
+    update m_goodtype
+    <set>
+      <if test="gtypename != null">
+        gtypename = #{gtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="gtypedesc != null">
+        gtypedesc = #{gtypedesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gtypeid = #{gtypeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MGoodtype">
+    update m_goodtype
+    set gtypename = #{gtypename,jdbcType=VARCHAR},
+      gtypedesc = #{gtypedesc,jdbcType=VARCHAR}
+    where gtypeid = #{gtypeid,jdbcType=INTEGER}
+  </update>
+</mapper>

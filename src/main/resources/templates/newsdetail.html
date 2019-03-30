@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header :: header('新闻详情')"></head>
+<body>
+<header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
+<section id="inner-title" class="inner-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-6">
+        <h2>新闻详情</h2>
+      </div>
+      <div class="col-md-6 col-lg-6">
+        <div class="breadcrumbs">
+          <ul>
+            <li>当前页:</li>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="newslist.html">站点新闻</a></li>
+            <li><a href="javascript:void(0)">新闻详情</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="section14" class="section-margine blog-list">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <div class="section-14-box">
+          <img th:src="@{${newsdata?.imgpath}}" class="img-responsive" th:alt="${newsdata.ntitle}">
+          <h3><a href="javascript:void(0)" th:text="${newsdata?.ntitle}"></a></h3>
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="comments">
+                <a class=""><i class="fa fa-calendar"></i> <span th:text="${#dates.format(newsdata?.createdate,'yyyy-MM-dd')}"></span></a>
+                <a class=""><i class="fa fa-user"></i> <span th:text="${newsdata?.newstype?.ntypename}"></span></a>
+              </div>
+            </div>
+          </div>
+          <div th:utext="${newsdata?.ndetail}">
+
+          </div>
+          
+          <!--<div class="comment-form-container wow fadeInLeft">-->
+          <!--<h4 class="color-deep"><a href="#">LEAVE A COMMENT</a></h4>-->
+          <!--<form name="sentMessage" action="#" id="contactForm" novalidate>-->
+            <!--<div class="col-md-6 nopadding-left">-->
+              <!--<div class="control-group form-group">-->
+                <!--<div class="controls">-->
+                  <!--<input type="text" class="form-control" id="name" placeholder="Name..">-->
+                  <!--<p class="help-block"></p>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-6 nopadding-left">-->
+              <!--<div class="control-group form-group">-->
+                <!--<div class="controls">-->
+                  <!--<input type="tel" class="form-control" id="phone" required placeholder="Phone..">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-12 nopadding-left">-->
+              <!--<div class="control-group form-group">-->
+                <!--<div class="controls">-->
+                  <!--<input type="email" class="form-control" id="email" required placeholder="Email..">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-12 nopadding-left">-->
+              <!--<div class="control-group form-group">-->
+                <!--<div class="controls">-->
+                  <!--<textarea rows="10" cols="100" class="form-control" id="message" required placeholder="Message.."  maxlength="999" style="resize:none"></textarea>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div id="success"></div>-->
+            <!--&lt;!&ndash; For success/fail messages &ndash;&gt;-->
+            <!--<div class="col-md-12 nopadding-left">-->
+              <!--<button type="submit" class="btn btn-primary">Send Message</button>-->
+            <!--</div>-->
+          <!--</form>-->
+        <!--</div>-->
+        </div>
+      </div>
+      <!--<div class="col-md-3 col-lg-3">-->
+        <!--&lt;!&ndash;<div class="section-14-box"> &ndash;&gt;-->
+          <!--&lt;!&ndash;<h4 class="underline">SEARCH</h4>&ndash;&gt;-->
+          <!--&lt;!&ndash;<form class="search-form" action="http://tiyoshent.in/Pixel/search" method="post">&ndash;&gt;-->
+                <!--&lt;!&ndash;<input type="search" class="blog-search-field" placeholder="Search..." value="" name="s" title="Search for:"> &ndash;&gt;-->
+                <!--&lt;!&ndash;<button type="submit">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i class="fa fa-search"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;</button> &ndash;&gt;-->
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="section-14-box"> &ndash;&gt;-->
+          <!--&lt;!&ndash;<h4 class="underline">CATEGORIES</h4>&ndash;&gt;-->
+          <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">Foundation</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">Bootstrap</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">Jquery</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">HTML</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">PSD</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">CSS</a></li>&ndash;&gt;-->
+          <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--<div class="section-14-box"> -->
+          <!--<h4 class="underline">最新新闻</h4>-->
+          <!--<ul>-->
+             <!--<li><a href="#">Lorem ipsum dolor sit amet</a></li>-->
+             <!--<li><a href="#">Consetetur sadipscing elitr</a></li>-->
+             <!--<li><a href="#">Sed diam nonumy eirmod </a></li>-->
+             <!--<li><a href="#">Invidunt ut labore et dolore</a></li>-->
+             <!--<li><a href="#">Aliquyam erat, sed diam</a></li>-->
+             <!--<li><a href="#">At vero eos et accusam et justo</a></li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="section-14-box"> -->
+          <!--<h4 class="underline">TAGS</h4>-->
+          <!--<ul>-->
+             <!--<li><a href="#" class="tag">Foundation</a></li>-->
+             <!--<li><a href="#" class="tag">Bootstrap</a></li>-->
+             <!--<li><a href="#" class="tag">Jquery</a></li>-->
+             <!--<li><a href="#" class="tag">HTML</a></li>-->
+             <!--<li><a href="#" class="tag">PSD</a></li>-->
+             <!--<li><a href="#" class="tag">CSS</a></li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+  </div>
+</section>
+<section id="section10" class="section-10-background">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-lg-9">
+        <div class="section-10-box-text-cont">
+          <h3>想了解更多吗？我们诚挚地欢迎您进行电话咨询，<span class="color-yellow" th:text="'电话号码：'+${config.phone1}"></span></h3>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="section-10-btn-cont"><a class="btn btn-secondary wow fadeInUp" th:href="'tel:'+${config.phone1}">立即拨打</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="footer-top" class="footer-top" th:include="footer :: footer-top(${config},${bottomNews})"></section>
+
+<section id="footer-bottom" class="footer-bottom" th:include="footer :: footer-bottom"></section>
+<script src="js/jquery.min.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.plugin.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script> 
+<script src="js/jquery.magnific-popup.min.js"></script> 
+<script src="js/bootstrap-dropdownhover.min.js"></script>
+<script src="js/wow.min.js"></script> 
+<script src="js/waypoints.min.js"></script> 
+<script src="js/jquery.counterup.min.js"></script> 
+<script src="js/main.js"></script>
+</body>
+</html>

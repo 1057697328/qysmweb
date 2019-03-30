@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lightwing.mediweb.dao.MNewsDao">
+  <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MNews">
+    <id column="nid" jdbcType="INTEGER" property="nid" />
+    <result column="ntitle" jdbcType="VARCHAR" property="ntitle" />
+    <result column="createdate" jdbcType="DATE" property="createdate" />
+    <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
+    <result column="ntypeid" jdbcType="INTEGER" property="ntypeid" />
+  </resultMap>
+
+
+  <resultMap id="newsWithType" type="net.lightwing.mediweb.pojo.MNews">
+    <id column="nid" jdbcType="INTEGER" property="nid" />
+    <result column="ntitle" jdbcType="VARCHAR" property="ntitle" />
+    <result column="createdate" jdbcType="DATE" property="createdate" />
+    <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
+    <result column="ntypeid" jdbcType="INTEGER" property="ntypeid" />
+    <result column="ndetail" jdbcType="LONGVARCHAR" property="ndetail" />
+    <association property="newstype" javaType="net.lightwing.mediweb.pojo.MNewstype">
+      <id column="ntypeid" jdbcType="INTEGER" property="ntypeid" />
+      <result column="ntypename" jdbcType="VARCHAR" property="ntypename" />
+    </association>
+
+  </resultMap>
+
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.mediweb.pojo.MNews">
+    <result column="ndetail" jdbcType="LONGVARCHAR" property="ndetail" />
+  </resultMap>
+
+
+  <select id="selectWithType" resultMap="newsWithType">
+    select * from m_news n inner join m_newstype nt on (n.ntypeid=nt.ntypeid) order by nid desc
+    limit #{pageindex},#{pagesize};
+  </select>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    nid, ntitle, createdate, imgpath, ntypeid
+  </sql>
+  <sql id="Blob_Column_List">
+    ndetail
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MNewsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from m_news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="net.lightwing.mediweb.pojo.MNewsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from m_news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from m_news
+    where nid = #{nid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from m_news
+    where nid = #{nid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.lightwing.mediweb.pojo.MNewsExample">
+    delete from m_news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="nid" keyProperty="nid" parameterType="net.lightwing.mediweb.pojo.MNews" useGeneratedKeys="true">
+    insert into m_news (ntitle, createdate, imgpath, 
+      ntypeid, ndetail)
+    values (#{ntitle,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{imgpath,jdbcType=VARCHAR}, 
+      #{ntypeid,jdbcType=INTEGER}, #{ndetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="nid" keyProperty="nid" parameterType="net.lightwing.mediweb.pojo.MNews" useGeneratedKeys="true">
+    insert into m_news
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ntitle != null">
+        ntitle,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="imgpath != null">
+        imgpath,
+      </if>
+      <if test="ntypeid != null">
+        ntypeid,
+      </if>
+      <if test="ndetail != null">
+        ndetail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ntitle != null">
+        #{ntitle,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="imgpath != null">
+        #{imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="ntypeid != null">
+        #{ntypeid,jdbcType=INTEGER},
+      </if>
+      <if test="ndetail != null">
+        #{ndetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.lightwing.mediweb.pojo.MNewsExample" resultType="java.lang.Long">
+    select count(*) from m_news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectWithTypeSingle" resultType="net.lightwing.mediweb.pojo.MNews">
+    select * from m_news n inner join m_newstype nt on (n.ntypeid=nt.ntypeid)
+    where n.nid=#{nid}
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update m_news
+    <set>
+      <if test="record.nid != null">
+        nid = #{record.nid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ntitle != null">
+        ntitle = #{record.ntitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=DATE},
+      </if>
+      <if test="record.imgpath != null">
+        imgpath = #{record.imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntypeid != null">
+        ntypeid = #{record.ntypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ndetail != null">
+        ndetail = #{record.ndetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update m_news
+    set nid = #{record.nid,jdbcType=INTEGER},
+      ntitle = #{record.ntitle,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=DATE},
+      imgpath = #{record.imgpath,jdbcType=VARCHAR},
+      ntypeid = #{record.ntypeid,jdbcType=INTEGER},
+      ndetail = #{record.ndetail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update m_news
+    set nid = #{record.nid,jdbcType=INTEGER},
+      ntitle = #{record.ntitle,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=DATE},
+      imgpath = #{record.imgpath,jdbcType=VARCHAR},
+      ntypeid = #{record.ntypeid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MNews">
+    update m_news
+    <set>
+      <if test="ntitle != null">
+        ntitle = #{ntitle,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="imgpath != null">
+        imgpath = #{imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="ntypeid != null">
+        ntypeid = #{ntypeid,jdbcType=INTEGER},
+      </if>
+      <if test="ndetail != null">
+        ndetail = #{ndetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where nid = #{nid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MNews">
+    update m_news
+    set ntitle = #{ntitle,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE},
+      imgpath = #{imgpath,jdbcType=VARCHAR},
+      ntypeid = #{ntypeid,jdbcType=INTEGER},
+      ndetail = #{ndetail,jdbcType=LONGVARCHAR}
+    where nid = #{nid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MNews">
+    update m_news
+    set ntitle = #{ntitle,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE},
+      imgpath = #{imgpath,jdbcType=VARCHAR},
+      ntypeid = #{ntypeid,jdbcType=INTEGER}
+    where nid = #{nid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lightwing.mediweb.dao.MGoodsDao">
+  <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MGoods">
+    <id column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
+    <result column="gname" jdbcType="VARCHAR" property="gname" />
+    <result column="buypath" jdbcType="VARCHAR" property="buypath" />
+    <result column="gtypeid" jdbcType="INTEGER" property="gtypeid" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+  </resultMap>
+
+  <resultMap id="goodsWithType" type="net.lightwing.mediweb.pojo.MGoods">
+    <id column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
+    <result column="gname" jdbcType="VARCHAR" property="gname" />
+    <result column="buypath" jdbcType="VARCHAR" property="buypath" />
+    <result column="gtypeid" jdbcType="INTEGER" property="gtypeid" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <association property="goodtype" javaType="net.lightwing.mediweb.pojo.MGoodtype">
+      <id column="gtypeid" jdbcType="INTEGER" property="gtypeid" />
+      <result column="gtypename" jdbcType="VARCHAR" property="gtypename" />
+      <result column="gtypedesc" jdbcType="VARCHAR" property="gtypedesc" />
+    </association>
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    gid, imgpath, gname, buypath, gtypeid, price
+  </sql>
+  <select id="selectByExample" parameterType="net.lightwing.mediweb.pojo.MGoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from m_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from m_goods
+    where gid = #{gid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from m_goods
+    where gid = #{gid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.lightwing.mediweb.pojo.MGoodsExample">
+    delete from m_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="gid" keyProperty="gid" parameterType="net.lightwing.mediweb.pojo.MGoods" useGeneratedKeys="true">
+    insert into m_goods (imgpath, gname, buypath, 
+      gtypeid, price)
+    values (#{imgpath,jdbcType=VARCHAR}, #{gname,jdbcType=VARCHAR}, #{buypath,jdbcType=VARCHAR}, 
+      #{gtypeid,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" keyColumn="gid" keyProperty="gid" parameterType="net.lightwing.mediweb.pojo.MGoods" useGeneratedKeys="true">
+    insert into m_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imgpath != null">
+        imgpath,
+      </if>
+      <if test="gname != null">
+        gname,
+      </if>
+      <if test="buypath != null">
+        buypath,
+      </if>
+      <if test="gtypeid != null">
+        gtypeid,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imgpath != null">
+        #{imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null">
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="buypath != null">
+        #{buypath,jdbcType=VARCHAR},
+      </if>
+      <if test="gtypeid != null">
+        #{gtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.lightwing.mediweb.pojo.MGoodsExample" resultType="java.lang.Long">
+    select count(*) from m_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update m_goods
+    <set>
+      <if test="record.gid != null">
+        gid = #{record.gid,jdbcType=INTEGER},
+      </if>
+      <if test="record.imgpath != null">
+        imgpath = #{record.imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gname != null">
+        gname = #{record.gname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buypath != null">
+        buypath = #{record.buypath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gtypeid != null">
+        gtypeid = #{record.gtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update m_goods
+    set gid = #{record.gid,jdbcType=INTEGER},
+      imgpath = #{record.imgpath,jdbcType=VARCHAR},
+      gname = #{record.gname,jdbcType=VARCHAR},
+      buypath = #{record.buypath,jdbcType=VARCHAR},
+      gtypeid = #{record.gtypeid,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MGoods">
+    update m_goods
+    <set>
+      <if test="imgpath != null">
+        imgpath = #{imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null">
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="buypath != null">
+        buypath = #{buypath,jdbcType=VARCHAR},
+      </if>
+      <if test="gtypeid != null">
+        gtypeid = #{gtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MGoods">
+    update m_goods
+    set imgpath = #{imgpath,jdbcType=VARCHAR},
+      gname = #{gname,jdbcType=VARCHAR},
+      buypath = #{buypath,jdbcType=VARCHAR},
+      gtypeid = #{gtypeid,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE}
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectWithType" resultMap="goodsWithType">
+    select * from m_goods g inner join m_goodtype gt on (g.gtypeid=gt.gtypeid);
+  </select>
+    <select id="getGoods" resultMap="goodsWithType">
+      select * from m_goods g inner join m_goodtype gt on (g.gtypeid=gt.gtypeid) where g.gname like '%${gname}%';
+    </select>
+
+</mapper>

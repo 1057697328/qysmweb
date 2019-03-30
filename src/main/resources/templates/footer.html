@@ -1,0 +1,114 @@
+<!--suppress ALL -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<section id="footer-top" class="footer-top" th:fragment="footer-top(config,bottomNews)">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-lg-4">
+                <div class="footer-top-box">
+                    <h4>关于我们</h4>
+                    <p th:text="${config?.bottomabout}"></p>
+                </div>
+                <!--<div class="footer-top-box">-->
+                    <!--<h4>Office Hour</h4>-->
+                    <!--<b>Mon-Fri :</b> 09am to 06pm<br/>-->
+                    <!--<b>Tues-Wed :</b> Special Appointment-->
+                <!--</div>-->
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="footer-top-box">
+                    <h4>最新新闻</h4>
+                    <ul>
+                        <li th:each="news,newsStat:${bottomNews}">
+                            <div class="recent-post-widget">
+                                <a th:href="@{'newsdetail.html?nid='+${news?.nid}}" class="widget-img-thumb">
+                                    <img th:src="@{${news?.imgpath}}" class="img-responsive">
+                                </a>
+                                <div class="widget-content">
+                                    <h5><a th:href="@{'newsdetail.html?nid='+${news?.nid}}" class="sidebar-item-title" th:text="${news?.ntitle}"></a></h5>
+                                    <a href="javascript:void(0)">
+                                        <p class="widget-date" th:text="'发布时间:'+${#dates.format(news?.createdate,'yyyy-MM-dd')}"></p>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+                        <!--<li>-->
+                            <!--<div class="recent-post-widget">-->
+                                <!--<a href="#" class="widget-img-thumb">-->
+                                    <!--<img src="images/post-2.jpg" class="img-responsive">-->
+                                <!--</a>-->
+                                <!--<div class="widget-content">-->
+                                    <!--<h5><a href="#" class="sidebar-item-title">Medical Instruments</a></h5>-->
+                                    <!--<a href="#">-->
+                                        <!--<p class="widget-date">Posted: 6 month ago</p>-->
+                                    <!--</a>-->
+                                <!--</div>-->
+                                <!--<div class="clearfix"></div>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+            </div>
+            <!--<div class="col-md-3 col-lg-3">-->
+                <!--<div class="footer-top-box">-->
+                    <!--<h4>Tags</h4>-->
+                    <!--<div class="tag"><a href="#">Acupuncture</a></div>-->
+                    <!--<div class="tag"><a href="#">Mammography</a></div>-->
+                    <!--<div class="tag"><a href="#">Neonatology</a></div>-->
+                    <!--<div class="tag"><a href="#">Diabetes Education</a></div>-->
+                    <!--<div class="tag"><a href="#">Geriatrics</a></div>-->
+                    <!--<div class="tag"><a href="#">Kidneys</a></div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="col-md-4 col-lg-4">
+                <div class="footer-top-box">
+                    <h4>联系我们</h4>
+                    <p><b th:text="'公司地址 : '+${config?.address}"></b><br/>
+                        <b th:text="'手机号码: '+${config?.phone1}" th:styleappend="${config?.phone1==null || config?.phone1==''?'display:none':''}"></b><br/>
+                        <b th:text="'座机号码: '+${config?.phone2}" th:styleappend="${config?.phone2==null || config?.phone2==''?'display:none':''}"></b><br/>
+                        <b th:text="'电子邮箱: '+${config?.email1}"></b>
+                    </p>
+                </div>
+                <!--<div class="footer-top-box">-->
+                    <!--<h4>Subscribe</h4>-->
+                    <!--<div class="cs-form">-->
+                        <!--<form action="#" method="post">-->
+                            <!--<div class="input-holder">-->
+                                <!--<input type="email" placeholder="Enter Valid Email Address">-->
+                                <!--<label> <i class="fa fa-location-arrow fa-2x"></i>-->
+                                    <!--<input class="submit-bgcolor" type="submit" value="submit">-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="footer-bottom" class="footer-bottom" th:fragment="footer-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="copyright" style="text-align: center">Copyright &copy; 2019 湖南紫澜生物科技有限公司 版权所有 由 <a
+                        href="https://www.lightwing.net" target="_blank" style="color: #aaaaaa;">长沙轻翼网络科技有限公司</a> 提供技术支持</div>
+            </div>
+            <!--<div class="col-lg-3">-->
+                <!--<ul class="list-inline social-buttons">-->
+                    <!--<li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
+                    <!--<li><a href="#"><i class="fa fa-facebook"></i></a></li>-->
+                    <!--<li><a href="#"><i class="fa fa-linkedin"></i></a></li>-->
+                    <!--<li><a href="#"><i class="fa fa-youtube"></i></a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

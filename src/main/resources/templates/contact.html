@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header :: header('关于我们')">
+</head>
+<body onload="onload()">
+<header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
+<section id="inner-title" class="inner-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-6">
+        <h2>联系我们</h2>
+      </div>
+      <div class="col-md-6 col-lg-6">
+        <div class="breadcrumbs">
+          <ul>
+            <li>当前页:</li>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="contact.html">联系我们</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="section16" class="section16">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">
+        <div class="single-location">
+          <div class="loc-icon">
+            <i class="fa fa-phone fa-2x"></i>
+          </div>
+          <span class="loc-content" th:text="'手机号码：'+${config?.phone1}" th:styleappend="${config?.phone1==null || config?.phone1==''?'display:none':''}"></span>
+          <span class="loc-content" th:text="'电话号码：'+${config?.phone2}" th:styleappend="${config?.phone2==null || config?.phone2==''?'display:none':''}"></span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="single-location">
+          <div class="loc-icon">
+            <i class="fa fa-envelope fa-2x"></i>
+          </div>
+          <span class="loc-content" th:text="'电子邮件：'+${config?.email1}" th:styleappend="${config?.email1==null || config?.email1==''?'display:none':''}">example@gmail.com</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="single-location">
+          <div class="loc-icon">
+            <i class="fa fa-map-marker fa-2x"></i>
+          </div>
+          <span class="loc-content" th:text="'联系地址：'+${config?.address}"></span>
+          <!--<span class="loc-content">New Road, Mt 3256</span>-->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-6" style="padding-bottom:1.5rem;">
+        <form action="/addContact" method="post">
+          <!-- successfully -->
+          <p class="success alert alert-success"><i class="fa fa-check"></i> 您的留言提交成功！ </p>
+          <!-- unsuccessfully -->
+          <p class="error alert alert-danger"><i class="fa fa-times"></i> 请检查您的电子邮件格式是否正确 </p>
+          <div class="control-group form-group">
+            <div class="controls">
+              <input  class="form-control" id="cf-name" type="text" name="name" placeholder="请输入您的姓名">
+              <p class="help-block"></p>
+            </div>
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <input class="form-control" id="cf-email" type="text" name="phone" placeholder="请输入您的联系电话">
+            </div>
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+             <input class="form-control" id="cf-subject" type="text" name="subject" placeholder="请输入您的留言主题">
+            </div>
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <textarea class="form-control custom-control" id="cf-message" rows="4" name="message" placeholder="请输入您的留言正文"></textarea>
+            </div>
+          </div>
+          <div id="success"></div>
+          <!-- For success/fail messages -->
+          <button type="submit" id="cf-submit" name="submit" class="btn btn-primary">提交留言</button>
+        </form>
+      </div>
+      <div class="col-md-6 col-lg-6">
+        <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.4515050296823!2d85.30938781439113!3d27.70334258279361!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m3!3e6!4m0!4m0!5e0!3m2!1sen!2snp!4v1469920087323" width="800" height="370" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+        <!--百度地图容器-->
+        <div style="width:100%;height:30rem;border:#ccc solid 1px;" id="dituContent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="footer-top" class="footer-top" th:include="footer :: footer-top(${config},${bottomNews})"></section>
+
+<section id="footer-bottom" class="footer-bottom" th:include="footer :: footer-bottom"></section>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/jquery.min.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.plugin.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script> 
+<script src="js/jquery.magnific-popup.min.js"></script> 
+<script src="js/bootstrap-dropdownhover.min.js"></script>
+<script src="js/wow.min.js"></script> 
+<script src="js/waypoints.min.js"></script> 
+<script src="js/jquery.counterup.min.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=HhFA57Ro1Xox2pS5FGX3XVPcf4ooUekC"></script>
+
+<script th:inline="javascript">
+
+  function onload(){
+
+    var message = [[${message}]];
+
+      if(message.code==200 || message.code==500)
+      {
+        swal({
+          title:message.msg,
+          button:"好的"
+        }).then(function(){
+          window.location.href="contact.html";
+        })
+
+      }
+
+
+  }
+
+</script>
+
+
+
+<script type="text/javascript">
+  //创建和初始化地图函数：
+  function initMap(){
+    createMap();//创建地图
+    setMapEvent();//设置地图事件
+    addMapControl();//向地图添加控件
+    addMarker();//向地图中添加marker
+  }
+
+  //创建地图函数：
+  function createMap(){
+    var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+    var point = new BMap.Point(113.097563,28.260208);//定义一个中心点坐标
+    map.centerAndZoom(point,18);//设定地图的中心点和坐标并将地图显示在地图容器中
+    window.map = map;//将map变量存储在全局
+  }
+
+  //地图事件设置函数：
+  function setMapEvent(){
+    map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+    map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+    map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+    map.enableKeyboard();//启用键盘上下左右键移动地图
+  }
+
+  //地图控件添加函数：
+  function addMapControl(){
+    //向地图中添加缩放控件
+    var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+    map.addControl(ctrl_nav);
+    //向地图中添加缩略图控件
+    var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
+    map.addControl(ctrl_ove);
+    //向地图中添加比例尺控件
+    var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+    map.addControl(ctrl_sca);
+  }
+
+  //标注点数组
+  var markerArr = [{title:"湖南紫澜生物科技有限公司",content:"湖南省长沙县星沙街道特立东路198号松雅轩住宅小区1栋2单元1808号",point:"113.097684|28.260192",isOpen:0,icon:{w:23,h:25,l:23,t:21,x:9,lb:12}}
+  ];
+  //创建marker
+  function addMarker(){
+    for(var i=0;i<markerArr.length;i++){
+      var json = markerArr[i];
+      var p0 = json.point.split("|")[0];
+      var p1 = json.point.split("|")[1];
+      var point = new BMap.Point(p0,p1);
+      var iconImg = createIcon(json.icon);
+      var marker = new BMap.Marker(point,{icon:iconImg});
+      var iw = createInfoWindow(i);
+      var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
+      marker.setLabel(label);
+      map.addOverlay(marker);
+      label.setStyle({
+        borderColor:"#808080",
+        color:"#333",
+        cursor:"pointer"
+      });
+
+      (function(){
+        var index = i;
+        var _iw = createInfoWindow(i);
+        var _marker = marker;
+        _marker.addEventListener("click",function(){
+          this.openInfoWindow(_iw);
+        });
+        _iw.addEventListener("open",function(){
+          _marker.getLabel().hide();
+        })
+        _iw.addEventListener("close",function(){
+          _marker.getLabel().show();
+        })
+        label.addEventListener("click",function(){
+          _marker.openInfoWindow(_iw);
+        })
+        if(!!json.isOpen){
+          label.hide();
+          _marker.openInfoWindow(_iw);
+        }
+      })()
+    }
+  }
+  //创建InfoWindow
+  function createInfoWindow(i){
+    var json = markerArr[i];
+    var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
+    return iw;
+  }
+  //创建一个Icon
+  function createIcon(json){
+    var icon = new BMap.Icon("https://img.icons8.com/ultraviolet/40/000000/marker.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+    return icon;
+  }
+
+  initMap();//创建和初始化地图
+</script>
+
+
+</body>
+</html>

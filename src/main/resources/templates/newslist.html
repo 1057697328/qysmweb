@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header :: header('站点新闻')"></head>
+<body>
+<header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
+<section id="inner-title" class="inner-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-6">
+        <h2>站点新闻</h2>
+      </div>
+      <div class="col-md-6 col-lg-6">
+        <div class="breadcrumbs">
+          <ul>
+            <li>当前页:</li>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="newslist.html">站点新闻</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="section14" class="section-margine blog-list">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+
+        <div class="section-14-box" th:each="news,newsStat:${pagedata.list}">
+          <img th:src="@{${news?.imgpath}}" class="img-responsive" th:alt="${news?.ntitle}">
+          <h3 class="text-left"><a th:href="@{'newsdetail.html?nid='+${news?.nid}}" th:text="${news?.ntitle}"></a></h3>
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="comments">
+                <a class="" style="padding-right:1rem;"><i class="fa fa-calendar"></i> <span th:text="${#dates.format(news?.createdate,'yyyy-MM-dd')}"></span></a>
+                <a class=""><i class="fa fa-file-text"></i> <span th:text="${news?.newstype?.ntypename}"></span></a>
+              </div>
+            </div>
+          </div>
+          <p th:utext="${#strings.abbreviate(news?.ndetail,100)}"></p>
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="text-left"><a th:href="@{'newsdetail.html?nid='+${news?.nid}}" class="btn btn-primary">阅读全文</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!--<div class="section-14-box">-->
+          <!--<img src="images/blog/blog-2.jpg" class="img-responsive" alt="Blog image 1">-->
+          <!--<h3><a href="#">Surgery Advices</a></h3>-->
+          <!--<div class="row">-->
+            <!--<div class="col-md-12 col-lg-12">-->
+              <!--<div class="comments">-->
+                <!--<a class=""><i class="fa fa-calendar"></i> July, 30, 30</a>-->
+                <!--<a class=""><i class="fa fa-user"></i> rkwebdes</a>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>-->
+          <!--<div class="row">-->
+            <!--<div class="col-md-12 col-lg-12">-->
+              <!--<div class="text-left"><a href="blog-details.html" class="btn btn-primary">Read More</a></div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="section-14-box">-->
+          <!--<img src="images/blog/blog-3.jpg" class="img-responsive" alt="Blog image 1">-->
+          <!--<h3><a href="#">Medicine Sale Market</a></h3>-->
+          <!--<div class="row">-->
+            <!--<div class="col-md-12 col-lg-12">-->
+              <!--<div class="comments">-->
+                <!--<a class=""><i class="fa fa-calendar"></i> July, 30, 30</a>-->
+                <!--<a class=""><i class="fa fa-user"></i> rkwebdes</a>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>-->
+          <!--<div class="row">-->
+            <!--<div class="col-md-12 col-lg-12">-->
+              <!--<div class="text-left"><a href="blog-details.html" class="btn btn-primary">Read More</a></div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      </div>
+      <!--<div class="col-md-3 col-lg-3">-->
+        <!--&lt;!&ndash;<div class="section-14-box"> &ndash;&gt;-->
+          <!--&lt;!&ndash;<h4 class="underline">SEARCH</h4>&ndash;&gt;-->
+          <!--&lt;!&ndash;<form class="search-form" action="http://tiyoshent.in/Pixel/search" method="post">&ndash;&gt;-->
+                <!--&lt;!&ndash;<input type="search" class="blog-search-field" placeholder="Search..." value="" name="s" title="Search for:"> &ndash;&gt;-->
+                <!--&lt;!&ndash;<button type="submit">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i class="fa fa-search"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;</button> &ndash;&gt;-->
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="section-14-box"> &ndash;&gt;-->
+          <!--&lt;!&ndash;<h4 class="underline">CATEGORIES</h4>&ndash;&gt;-->
+          <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">Foundation</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">Bootstrap</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">Jquery</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">HTML</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">PSD</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#">CSS</a></li>&ndash;&gt;-->
+          <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="section-14-box"> &ndash;&gt;-->
+          <!--&lt;!&ndash;<h4 class="underline">最新新闻</h4>&ndash;&gt;-->
+          <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li th:each="news,newsStat:${pagedata?.list}"><a href="#" th:text="${news.ntitle}"></a></li>&ndash;&gt;-->
+          <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="section-14-box"> &ndash;&gt;-->
+          <!--&lt;!&ndash;<h4 class="underline">TAGS</h4>&ndash;&gt;-->
+          <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#" class="tag">Foundation</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#" class="tag">Bootstrap</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#" class="tag">Jquery</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#" class="tag">HTML</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#" class="tag">PSD</a></li>&ndash;&gt;-->
+             <!--&lt;!&ndash;<li><a href="#" class="tag">CSS</a></li>&ndash;&gt;-->
+          <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--</div>-->
+
+    </div>
+    <div class="row" style="margin-bottom:2rem;">
+      <div class="col-12">
+        <a href="newslist.html" class="btn btn-info">首页</a>
+        <a th:href="@{'newslist.html?pageindex='+${pagedata.prevpage}}" class="btn btn-info" th:classappend="${pagedata.pageindex==1}?'disabled':''" th:text="上一页"></a>
+        <a th:href="@{'newslist.html?pageindex='+${pagedata.nextpage}}" class="btn btn-info" th:classappend="${pagedata.nextpage==0 || pagedata.nextpage==pagedata.pageindex}?'disabled':''" th:text="下一页"></a>
+        <a th:href="@{'newslist.html?pageindex='+${pagedata.pagecount}}" class="btn btn-info" th:text="尾页"></a>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section id="section10" class="section-10-background">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-lg-9">
+        <div class="section-10-box-text-cont">
+          <h3>想了解更多吗？我们诚挚地欢迎您进行电话咨询，<span class="color-yellow" th:text="'电话号码：'+${config.phone1}"></span></h3>
+
+        </div>
+      </div>
+      <div class="col-md-col-lg-3">
+        <div class="section-10-btn-cont"><a class="btn btn-secondary wow fadeInUp" th:href="'tel:'+${config.phone1}">立即拨打</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="footer-top" class="footer-top" th:include="footer :: footer-top(${config},${bottomNews})"></section>
+
+<section id="footer-bottom" class="footer-bottom" th:include="footer :: footer-bottom"></section>
+<script src="js/jquery.min.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.plugin.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script> 
+<script src="js/jquery.magnific-popup.min.js"></script> 
+<script src="js/bootstrap-dropdownhover.min.js"></script>
+<script src="js/wow.min.js"></script> 
+<script src="js/waypoints.min.js"></script> 
+<script src="js/jquery.counterup.min.js"></script> 
+<script src="js/main.js"></script>
+</body>
+</html>
