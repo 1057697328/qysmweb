@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header :: header('项目列表')">
+</head>
+<body>
+<header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
+<section class="inner-title" id="inner-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <h2>专家详情</h2>
+
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li>当前页</li>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="expertDetails.html">专家详情</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-margine">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-lg-3" style="height: auto;">
+                <ul style="list-style: none;">
+                    <li>
+                        <u>
+                            <a>
+                                项目名称
+                            </a>
+                        </u>
+                    </li>
+                </ul>
+                <div style="text-align: center;">
+                    分页
+                </div>
+            </div>
+            <div class="col-md-7 col-lg-7" style="height: auto">
+                <div>
+                    <h3>详情</h3>
+                    <div>
+                        sfdsdf
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section id="footer-top" class="footer-top" th:include="footer :: footer-top(${config},${bottomNews})"></section>
+
+<section id="footer-bottom" class="footer-bottom" th:include="footer :: footer-bottom"></section>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.plugin.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/bootstrap-dropdownhover.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/jquery.counterup.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

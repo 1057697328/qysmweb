@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header :: header('专家列表')">
+<body>
+<header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
+<section class="inner-title" id="inner-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <h2>专家列表</h2>
+
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li>当前页</li>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="expertList.html">专家列表</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-margine">
+    <div style="margin: 0 auto; width: 60%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12" style="margin-bottom: 3%;">
+                    <div class="col-sm-2">
+                        <div style="background: red; width: 180px;height: 200px;">
+                            <a th:href="expertDetails.html">专家图片</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div style="height: 200px; background: blue;">
+                            <div>
+                                <span>专家姓名：<span>姓名</span></span>
+                            </div>
+                            <div>
+                                <span>简介：</span>
+                                <div></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 3%;" class="col-sm-12">
+                    <div class="col-sm-2">
+                        <div style="background: red; width: 180px;height: 200px;">
+                            专家图片
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div style="height: 200px; background: blue;">
+                            <div>
+                                <span>专家姓名：<span>姓名</span></span>
+                            </div>
+                            <div>
+                                <span>简介：</span>
+                                <div></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 3%;" class="col-sm-12">
+                    <div class="col-sm-2">
+                        <div style="background: red; width: 180px;height: 200px;">
+                            专家图片
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div style="height: 200px; background: blue;">
+                            <div>
+                                <span>专家姓名：<span>姓名</span></span>
+                            </div>
+                            <div>
+                                <span>简介：</span>
+                                <div></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="footer-top" class="footer-top" th:include="footer :: footer-top(${config},${bottomNews})"></section>
+
+<section id="footer-bottom" class="footer-bottom" th:include="footer :: footer-bottom"></section>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.plugin.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/bootstrap-dropdownhover.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/jquery.counterup.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
