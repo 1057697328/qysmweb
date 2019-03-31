@@ -1,10 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<!--suppress ALL -->
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header :: header('关于我们')">
 </head>
 <body>
+<header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
+<section id="inner-title" class="inner-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-6"><h2>合作机构</h2></div>
+            <div class="col-md-6 col-lg-6">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li>当前页:</li>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="coop.html">合作机构</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-margine">
+    <div class="container">
 
+
+        <div class="row">
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/1.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/2.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/3.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/4.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/5.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/6.png" class="img-responsive wow fadeInUp" alt=""></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/1.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/2.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/3.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/4.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/5.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/6.png" class="img-responsive wow fadeInUp" alt=""></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/1.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/2.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/3.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/4.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/5.png" class="img-responsive wow fadeInUp" alt=""></div>
+            <div class="col-md-2 col-sm-4 col-xs-6"><img src="images/clients/6.png" class="img-responsive wow fadeInUp" alt=""></div>
+        </div>
+
+
+    </div>
+</section>
+<section id="section10" class="section-10-background" style="margin-top:5rem;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-lg-9">
+                <div class="section-10-box-text-cont">
+                    <h3>想了解更多吗？我们诚挚地欢迎您进行电话咨询，<span class="color-yellow" th:text="'电话号码：'+${config.phone1}"></span></h3>
+
+                </div>
+            </div>
+            <div class="col-md-col-lg-3">
+                <div class="section-10-btn-cont"><a class="btn btn-secondary wow fadeInUp" th:href="'tel:'+${config.phone1}">立即拨打</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="footer-top" class="footer-top" th:include="footer :: footer-top(${config},${bottomNews})"></section>
+
+<section id="footer-bottom" class="footer-bottom" th:include="footer :: footer-bottom"></section>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.plugin.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/bootstrap-dropdownhover.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/jquery.counterup.min.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

@@ -1,10 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<!--suppress ALL -->
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header :: header('关于我们')">
 </head>
 <body>
+<header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
+<section id="inner-title" class="inner-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-6"><h2>产业板块</h2></div>
+            <div class="col-md-6 col-lg-6">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li>当前页:</li>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="inductry.html">产业板块</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-margine">
+    <div class="container">
 
+
+        <div class="row">
+            <!--左侧产业分类,手机端占满-->
+            <div class="col-md-3 col-sm-12 col-xs-12">
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        产业板块名称
+                    </a>
+                    <a href="#" class="list-group-item">产业板块名称</a>
+                    <a href="#" class="list-group-item">产业板块名称</a>
+                    <a href="#" class="list-group-item">产业板块名称</a>
+                    <a href="#" class="list-group-item">产业板块名称</a>
+                </div>
+
+            </div>
+            <!--右侧内容展示/产业信息菜单区域,手机端占满-->
+            <div class="col-md-9 col-sm-9 col-xs-9">
+
+                <ul class="nav nav-pills">
+                    <li role="presentation" class="active"><a href="#">产业信息名称</a></li>
+                    <li role="presentation"><a href="#">产业信息名称</a></li>
+                    <li role="presentation"><a href="#">产业信息名称</a></li>
+                </ul>
+
+                <div class="page-header">
+                    <h1>产业信息名称</h1>
+                </div>
+
+                <div>
+                    <p>产业信息介绍内容.....</p>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</section>
+<section id="section10" class="section-10-background" style="margin-top:5rem;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-lg-9">
+                <div class="section-10-box-text-cont">
+                    <h3>想了解更多吗？我们诚挚地欢迎您进行电话咨询，<span class="color-yellow" th:text="'电话号码：'+${config.phone1}"></span></h3>
+
+                </div>
+            </div>
+            <div class="col-md-col-lg-3">
+                <div class="section-10-btn-cont"><a class="btn btn-secondary wow fadeInUp" th:href="'tel:'+${config.phone1}">立即拨打</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="footer-top" class="footer-top" th:include="footer :: footer-top(${config},${bottomNews})"></section>
+
+<section id="footer-bottom" class="footer-bottom" th:include="footer :: footer-bottom"></section>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.plugin.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/bootstrap-dropdownhover.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/jquery.counterup.min.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
