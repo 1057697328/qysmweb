@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="header :: header('专家列表')">
 <body>
@@ -23,69 +24,36 @@
     </div>
 </section>
 <section class="section-margine">
-    <div style="margin: 0 auto; width: 60%;">
+    <div>
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12" style="margin-bottom: 3%;">
-                    <div class="col-sm-2">
-                        <div style="background: red; width: 180px;height: 200px;">
-                            <a th:href="expertDetails.html">专家图片</a>
-                        </div>
+            <div class="row my-team">
+                <div class="col-md-3 col-sm-6 my-team-member wow fadeInUp" th:each="item:${pageData.list}" th:onclick="'javascript:jumpPage(\''+${item?.did}+'\');'">
+                    <div class="my-member-img">
+                        <img th:src="@{${item.imgpath}}" class="img-responsive" th:alt="${item.dname}">
                     </div>
-                    <div class="col-sm-7">
-                        <div style="height: 200px; background: blue;">
-                            <div>
-                                <span>专家姓名：<span>姓名</span></span>
-                            </div>
-                            <div>
-                                <span>简介：</span>
-                                <div></div>
-                            </div>
-
-                        </div>
+                    <div class="my-team-detail text-center">
+                        <h4 class="my-member-name" th:text="${item.dname}"></h4>
+                        <p class="my-member-post" th:text="${item.djob}"></p>
                     </div>
                 </div>
-                <div style="margin-bottom: 3%;" class="col-sm-12">
-                    <div class="col-sm-2">
-                        <div style="background: red; width: 180px;height: 200px;">
-                            专家图片
-                        </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div style="height: 200px; background: blue;">
-                            <div>
-                                <span>专家姓名：<span>姓名</span></span>
-                            </div>
-                            <div>
-                                <span>简介：</span>
-                                <div></div>
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-bottom: 3%;" class="col-sm-12">
-                    <div class="col-sm-2">
-                        <div style="background: red; width: 180px;height: 200px;">
-                            专家图片
-                        </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div style="height: 200px; background: blue;">
-                            <div>
-                                <span>专家姓名：<span>姓名</span></span>
-                            </div>
-                            <div>
-                                <span>简介：</span>
-                                <div></div>
-                            </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" style="margin-bottom:2rem;">
+                <div class="col-12" style="text-align: center;">
+                    <a href="expertList.html" class="btn btn-info">首页</a>
+                    <a th:href="@{'expertList.html?pageindex='+${pageData.prevpage}}" class="btn btn-info"
+                       th:classappend="${pageData.pageindex==1}?'disabled':''" th:text="上一页"></a>
+                    <a th:href="@{'expertList.html?pageindex='+${pageData.nextpage}}" class="btn btn-info"
+                       th:classappend="${pageData.nextpage==0 || pageData.nextpage==pageData.pageindex}?'disabled':''"
+                       th:text="下一页"></a>
+                    <a th:href="@{'expertList.html?pageindex='+${pageData.pagecount}}" class="btn btn-info"
+                       th:text="尾页"></a>
 
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
@@ -103,6 +71,11 @@
 <script src="js/waypoints.min.js"></script>
 <script src="js/jquery.counterup.min.js"></script>
 <script src="js/main.js"></script>
-
+<script th:inline="javascript">
+    function jumpPage(did)
+    {
+        window.location.href="expertDetails.html?did="+did;
+    }
+</script>
 </body>
 </html>

@@ -26,25 +26,32 @@
 <section class="section-margine">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-lg-3" style="height: auto;">
-                <ul style="list-style: none;">
-                    <li>
-                        <u>
-                            <a>
-                                项目名称
-                            </a>
-                        </u>
+            <div class="col-md-4 col-lg-4" style="height: auto;">
+                <ul class="list-group">
+
+                    <li class="list-group-item" th:each="item:${pageData.list}">
+                        <a href="javaScript:void(0)" th:onclick="'javascript:jumpPage(\''+${item?.pid}+'\');'"
+                           th:text="${item.pname}">
+                        </a>
                     </li>
                 </ul>
-                <div style="text-align: center;">
-                    分页
+                <div class="col-12" style="text-align: center;">
+                    <a href="projectList.html">首页</a>
+                    <a th:href="@{'projectList.html?pageindex='+${pageData.prevpage}}"
+                       th:classappend="${pageData.pageindex==1}?'disabled':''" th:text="上一页"></a>
+                    <a th:href="@{'projectList.html?pageindex='+${pageData.nextpage}}"
+                       th:classappend="${pageData.nextpage==0 || pageData.nextpage==pageData.pageindex}?'disabled':''"
+                       th:text="下一页"></a>
+                    <a th:href="@{'projectList.html?pageindex='+${pageData.pagecount}}"
+                       th:text="尾页"></a>
+
                 </div>
             </div>
-            <div class="col-md-7 col-lg-7" style="height: auto">
+            <div class="col-md-7 col-lg-7" style="height: auto" th:if="${mProject} ne null">
                 <div>
                     <h3>详情</h3>
-                    <div>
-                        sfdsdf
+                    <div th:utext="${mProject?.pdetail}">
+
                     </div>
                 </div>
             </div>
@@ -68,4 +75,9 @@
 <script src="js/main.js"></script>
 
 </body>
+<script th:inline="javascript">
+    function jumpPage(pid) {
+        window.location.href = "projectList.html?pid=" + pid;
+    }
+</script>
 </html>
