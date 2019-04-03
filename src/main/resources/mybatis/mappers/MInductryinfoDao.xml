@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lightwing.mediweb.dao.MInductryinfoDao">
+    <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MInductryinfo">
+        <id column="iiid" jdbcType="INTEGER" property="iiid"/>
+        <result column="iid" jdbcType="INTEGER" property="iid"/>
+        <result column="iiname" jdbcType="VARCHAR" property="iiname"/>
+        <association property="mInductry" column="iid" select="queryMInductry"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.mediweb.pojo.MInductryinfo">
+        <result column="iidetail" jdbcType="LONGVARCHAR" property="iidetail"/>
+    </resultMap>
+
+    <resultMap id="MInductryMap" type="net.lightwing.mediweb.pojo.MInductry">
+        <id column="iid" jdbcType="INTEGER" property="iid"/>
+        <result column="iname" jdbcType="VARCHAR" property="iname"/>
+        <result column="idesc" jdbcType="VARCHAR" property="idesc"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    iiid, iid, iiname
+  </sql>
+    <sql id="Blob_Column_List">
+    iidetail
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from m_inductryinfo
+        where iiid = #{iiid,jdbcType=INTEGER}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+      select count(*) from m_inductryinfo;
+    </select>
+    <select id="selectPageInfo" resultMap="BaseResultMap">
+        select * from m_inductryinfo limit #{pageindex}, #{pagesize}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from m_inductryinfo
+    where iiid = #{iiid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="iiid" keyProperty="iiid" parameterType="net.lightwing.mediweb.pojo.MInductryinfo"
+            useGeneratedKeys="true">
+    insert into m_inductryinfo (iid, iiname, iidetail
+      )
+    values (#{iid,jdbcType=INTEGER}, #{iiname,jdbcType=VARCHAR}, #{iidetail,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" keyColumn="iiid" keyProperty="iiid"
+            parameterType="net.lightwing.mediweb.pojo.MInductryinfo" useGeneratedKeys="true">
+        insert into m_inductryinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iid != null">
+                iid,
+            </if>
+            <if test="iiname != null">
+                iiname,
+            </if>
+            <if test="iidetail != null">
+                iidetail,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iid != null">
+                #{iid,jdbcType=INTEGER},
+            </if>
+            <if test="iiname != null">
+                #{iiname,jdbcType=VARCHAR},
+            </if>
+            <if test="iidetail != null">
+                #{iidetail,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MInductryinfo">
+        update m_inductryinfo
+        <set>
+            <if test="iid != null">
+                iid = #{iid,jdbcType=INTEGER},
+            </if>
+            <if test="iiname != null">
+                iiname = #{iiname,jdbcType=VARCHAR},
+            </if>
+            <if test="iidetail != null">
+                iidetail = #{iidetail,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where iiid = #{iiid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MInductryinfo">
+    update m_inductryinfo
+    set iid = #{iid,jdbcType=INTEGER},
+      iiname = #{iiname,jdbcType=VARCHAR},
+      iidetail = #{iidetail,jdbcType=LONGVARCHAR}
+    where iiid = #{iiid,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MInductryinfo">
+    update m_inductryinfo
+    set iid = #{iid,jdbcType=INTEGER},
+      iiname = #{iiname,jdbcType=VARCHAR}
+    where iiid = #{iiid,jdbcType=INTEGER}
+  </update>
+
+    <select id="queryMInductry" resultMap="MInductryMap">
+        select * from m_inductry where iid=#{iid};
+    </select>
+    <select id="selectById" resultType="net.lightwing.mediweb.pojo.MInductryinfo">
+        select * from m_inductryinfo where iiid = #{iiid};
+    </select>
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lightwing.mediweb.dao.MCoopDao">
+    <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MCoop">
+        <id column="coid" jdbcType="INTEGER" property="coid"/>
+        <result column="coname" jdbcType="VARCHAR" property="coname"/>
+        <result column="imgpath" jdbcType="VARCHAR" property="imgpath"/>
+        <result column="weburl" jdbcType="VARCHAR" property="weburl"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    coid, coname, imgpath, weburl
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from m_coop
+        where coid = #{coid,jdbcType=INTEGER}
+    </select>
+    <select id="selectPageInfo" resultMap="BaseResultMap">
+     select * from m_coop limit #{pageindex}, #{pagesize}
+  </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from m_coop;
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from m_coop
+    where coid = #{coid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="coid" keyProperty="coid" parameterType="net.lightwing.mediweb.pojo.MCoop"
+            useGeneratedKeys="true">
+    insert into m_coop (coname, imgpath, weburl
+      )
+    values (#{coname,jdbcType=VARCHAR}, #{imgpath,jdbcType=VARCHAR}, #{weburl,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" keyColumn="coid" keyProperty="coid" parameterType="net.lightwing.mediweb.pojo.MCoop"
+            useGeneratedKeys="true">
+        insert into m_coop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="coname != null">
+                coname,
+            </if>
+            <if test="imgpath != null">
+                imgpath,
+            </if>
+            <if test="weburl != null">
+                weburl,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="coname != null">
+                #{coname,jdbcType=VARCHAR},
+            </if>
+            <if test="imgpath != null">
+                #{imgpath,jdbcType=VARCHAR},
+            </if>
+            <if test="weburl != null">
+                #{weburl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MCoop">
+        update m_coop
+        <set>
+            <if test="coname != null">
+                coname = #{coname,jdbcType=VARCHAR},
+            </if>
+            <if test="imgpath != null">
+                imgpath = #{imgpath,jdbcType=VARCHAR},
+            </if>
+            <if test="weburl != null">
+                weburl = #{weburl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where coid = #{coid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MCoop">
+    update m_coop
+    set coname = #{coname,jdbcType=VARCHAR},
+      imgpath = #{imgpath,jdbcType=VARCHAR},
+      weburl = #{weburl,jdbcType=VARCHAR}
+    where coid = #{coid,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>
