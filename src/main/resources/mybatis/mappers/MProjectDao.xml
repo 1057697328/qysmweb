@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lightwing.mediweb.dao.MProjectDao">
+    <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MProject">
+        <id column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="pname" jdbcType="VARCHAR" property="pname"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.mediweb.pojo.MProject">
+        <result column="pdetail" jdbcType="LONGVARCHAR" property="pdetail"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    pid, pname
+  </sql>
+    <sql id="Blob_Column_List">
+    pdetail
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from m_project
+        where pid = #{pid,jdbcType=INTEGER}
+    </select>
+    <select id="selectPageInfo" resultMap="ResultMapWithBLOBs">
+      select * from m_project limit #{pageindex}, #{pagesize}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from m_project;
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from m_project
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="net.lightwing.mediweb.pojo.MProject"
+            useGeneratedKeys="true">
+    insert into m_project (pname, pdetail)
+    values (#{pname,jdbcType=VARCHAR}, #{pdetail,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="net.lightwing.mediweb.pojo.MProject"
+            useGeneratedKeys="true">
+        insert into m_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pname != null">
+                pname,
+            </if>
+            <if test="pdetail != null">
+                pdetail,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pname != null">
+                #{pname,jdbcType=VARCHAR},
+            </if>
+            <if test="pdetail != null">
+                #{pdetail,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MProject">
+        update m_project
+        <set>
+            <if test="pname != null">
+                pname = #{pname,jdbcType=VARCHAR},
+            </if>
+            <if test="pdetail != null">
+                pdetail = #{pdetail,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where pid = #{pid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MProject">
+    update m_project
+    set pname = #{pname,jdbcType=VARCHAR},
+      pdetail = #{pdetail,jdbcType=LONGVARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MProject">
+    update m_project
+    set pname = #{pname,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

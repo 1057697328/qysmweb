@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lightwing.mediweb.dao.MDoctorDao">
+    <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MDoctor">
+        <id column="did" jdbcType="INTEGER" property="did"/>
+        <result column="dname" jdbcType="VARCHAR" property="dname"/>
+        <result column="djob" jdbcType="VARCHAR" property="djob"/>
+        <result column="imgpath" jdbcType="VARCHAR" property="imgpath"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.mediweb.pojo.MDoctor">
+        <result column="ddesc" jdbcType="LONGVARCHAR" property="ddesc"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    did, dname, djob, imgpath
+  </sql>
+    <sql id="Blob_Column_List">
+    ddesc
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from m_doctor
+        where did = #{did,jdbcType=INTEGER}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+      select count(*) from m_doctor;
+    </select>
+    <select id="selectWithType" resultMap="ResultMapWithBLOBs">
+       select * from m_doctor limit #{pageindex},#{pagesize};
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from m_doctor
+    where did = #{did,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="did" keyProperty="did" parameterType="net.lightwing.mediweb.pojo.MDoctor"
+            useGeneratedKeys="true">
+    insert into m_doctor (dname, djob, imgpath, 
+      ddesc)
+    values (#{dname,jdbcType=VARCHAR}, #{djob,jdbcType=VARCHAR}, #{imgpath,jdbcType=VARCHAR}, 
+      #{ddesc,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" keyColumn="did" keyProperty="did" parameterType="net.lightwing.mediweb.pojo.MDoctor"
+            useGeneratedKeys="true">
+        insert into m_doctor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dname != null">
+                dname,
+            </if>
+            <if test="djob != null">
+                djob,
+            </if>
+            <if test="imgpath != null">
+                imgpath,
+            </if>
+            <if test="ddesc != null">
+                ddesc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dname != null">
+                #{dname,jdbcType=VARCHAR},
+            </if>
+            <if test="djob != null">
+                #{djob,jdbcType=VARCHAR},
+            </if>
+            <if test="imgpath != null">
+                #{imgpath,jdbcType=VARCHAR},
+            </if>
+            <if test="ddesc != null">
+                #{ddesc,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MDoctor">
+        update m_doctor
+        <set>
+            <if test="dname != null">
+                dname = #{dname,jdbcType=VARCHAR},
+            </if>
+            <if test="djob != null">
+                djob = #{djob,jdbcType=VARCHAR},
+            </if>
+            <if test="imgpath != null">
+                imgpath = #{imgpath,jdbcType=VARCHAR},
+            </if>
+            <if test="ddesc != null">
+                ddesc = #{ddesc,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where did = #{did,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MDoctor">
+    update m_doctor
+    set dname = #{dname,jdbcType=VARCHAR},
+      djob = #{djob,jdbcType=VARCHAR},
+      imgpath = #{imgpath,jdbcType=VARCHAR},
+      ddesc = #{ddesc,jdbcType=LONGVARCHAR}
+    where did = #{did,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MDoctor">
+    update m_doctor
+    set dname = #{dname,jdbcType=VARCHAR},
+      djob = #{djob,jdbcType=VARCHAR},
+      imgpath = #{imgpath,jdbcType=VARCHAR}
+    where did = #{did,jdbcType=INTEGER}
+  </update>
+</mapper>
