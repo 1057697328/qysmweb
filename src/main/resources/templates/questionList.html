@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="header :: header('项目列表')">
+<head th:include="header :: header('科普答疑列表')">
 </head>
 <body>
 <header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-lg-6">
-                <h2>项目详情</h2>
+                <h2>科普答疑详情</h2>
 
             </div>
             <div class="col-md-6 col-lg-6">
@@ -16,7 +16,7 @@
                     <ul>
                         <li>当前页</li>
                         <li><a href="index.html">首页</a></li>
-                        <li><a href="expertDetails.html">项目详情</a></li>
+                        <li><a href="expertDetails.html">科普答疑详情</a></li>
                     </ul>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                 <ul class="list-group">
 
                     <li class="list-group-item" th:each="item:${pageData.list}">
-                        <a href="javaScript:void(0)" th:onclick="'javascript:jumpPage(\''+${item?.pid}+'\');'"
-                           th:text="${item.pname}">
+                        <a href="javaScript:void(0)" th:onclick="'javascript:jumpPage(\''+${item?.qid}+'\');'"
+                           th:text="${item.qname}">
                         </a>
                     </li>
                 </ul>
@@ -47,10 +47,10 @@
 
                 </div>
             </div>
-            <div class="col-md-7 col-lg-7" style="height: auto" th:if="${mProject} ne null">
+            <div class="col-md-7 col-lg-7" style="height: auto" th:if="${mQuestion} ne null">
                 <div>
                     <h3>详情</h3>
-                    <div th:utext="${mProject?.pdetail}">
+                    <div th:utext="${mQuestion?.qanswer}">
 
                     </div>
                 </div>
@@ -76,8 +76,8 @@
 
 </body>
 <script th:inline="javascript">
-    function jumpPage(pid) {
-        window.location.href = "projectList.html?pid=" + pid;
+    function jumpPage(qid) {
+        window.location.href = "questionList.html?qid=" + qid;
     }
 </script>
 </html>
