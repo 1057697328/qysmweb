@@ -9,7 +9,7 @@ public class Constant {
     /**
      * 图片上传路径
      */
-    public static final String UPLOADPATH = "G:/qysmweb_files/images/";
+    public static final String UPLOADPATH = "D:/qysmweb_files/images/";
 
     /**
      * 域名
