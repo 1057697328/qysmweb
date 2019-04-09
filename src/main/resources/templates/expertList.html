@@ -2,6 +2,11 @@
 <!--suppress ALL -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="header :: header('专家列表')">
+    <style>
+        .wow {
+            cursor: pointer;
+        }
+    </style>
 <body>
 <header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
 <section class="inner-title" id="inner-title">
@@ -27,7 +32,8 @@
     <div>
         <div class="container">
             <div class="row my-team">
-                <div class="col-md-3 col-sm-6 my-team-member wow fadeInUp" th:each="item:${pageData.list}" th:onclick="'javascript:jumpPage(\''+${item?.did}+'\');'">
+                <div class="col-md-3 col-sm-6 my-team-member wow fadeInUp" th:each="item:${pageData.list}"
+                     th:onclick="'javascript:jumpPage(\''+${item?.did}+'\');'">
                     <div class="my-member-img">
                         <img th:src="@{${item.imgpath}}" class="img-responsive" th:alt="${item.dname}">
                     </div>
@@ -72,9 +78,8 @@
 <script src="js/jquery.counterup.min.js"></script>
 <script src="js/main.js"></script>
 <script th:inline="javascript">
-    function jumpPage(did)
-    {
-        window.location.href="expertDetails.html?did="+did;
+    function jumpPage(did) {
+        window.location.href = "expertDetails.html?did=" + did;
     }
 </script>
 </body>

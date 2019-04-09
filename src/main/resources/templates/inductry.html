@@ -32,7 +32,7 @@
                 <div class="list-group">
                     <a href="javaScript:void(0)" class="list-group-item active" th:each="item:${pageData.list}"
                        th:onclick="'javascript:jumpPage(\''+${item?.iid}+'\');'">
-                        <label th:text="${item.iname}"></label>
+                        <label th:text="${item?.iname}"></label>
                     </a>
                     <!--<a href="#" class="list-group-item">产业板块名称</a>-->
                     <!--<a href="#" class="list-group-item">产业板块名称</a>-->
@@ -45,20 +45,26 @@
             <div class="col-md-9 col-sm-9 col-xs-9" th:if="${mInductryInfoList} ne null">
 
                 <ul class="nav nav-pills">
-                    <li role="presentation" class="active" th:each="item:${mInductryInfoList}">
-                        <a href="javaScript:void(0)" th:text="${item.iiname}"
+                    <li role="presentation" class="active"
+                        th:each="item:${mInductryInfoList}">
+                        <a href="javaScript:void(0)" th:text="${item?.iiname}"
                            th:onclick="'javascript:getById(\''+${item?.iiid}+'\');'">产业信息名称</a>
                     </li>
+
                     <!--<li role="presentation"><a href="#">产业信息名称</a></li>-->
                     <!--<li role="presentation"><a href="#">产业信息名称</a></li>-->
                 </ul>
 
                 <div class="page-header">
-                    <h1 th:text="${mInductryInfo.iiname}">产业信息名称</h1>
+                    <h1 th:text="${mInductryInfo?.iiname}">产业信息名称</h1>
                 </div>
 
-                <div th:utext="${mInductryInfo.iidetail}">
+                <div th:utext="${mInductryInfo?.iidetail}" th:if="${mInductryInfo!=null}">
                     <p>产业信息介绍内容.....</p>
+                </div>
+
+                <div th:if="${mInductryInfo==null}">
+                    <p>暂无产业信息介绍内容.....</p>
                 </div>
 
             </div>
