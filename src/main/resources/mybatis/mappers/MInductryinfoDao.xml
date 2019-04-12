@@ -28,7 +28,7 @@
         ,
         <include refid="Blob_Column_List"/>
         from m_inductryinfo
-        where iiid = #{iiid,jdbcType=INTEGER}
+        where iid = #{iid,jdbcType=INTEGER}
     </select>
     <select id="count" resultType="java.lang.Integer">
       select count(*) from m_inductryinfo;

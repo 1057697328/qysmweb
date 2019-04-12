@@ -15,7 +15,7 @@ public interface MInductryinfoDao {
 
     int insertSelective(MInductryinfo record);
 
-    List<MInductryinfo> selectByPrimaryKey(Integer iiid);
+    List<MInductryinfo> selectByPrimaryKey(Integer iid);
 
     int updateByPrimaryKeySelective(MInductryinfo record);
 

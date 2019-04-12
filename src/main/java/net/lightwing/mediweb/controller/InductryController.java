@@ -38,8 +38,8 @@ public class InductryController {
         List<MInductry> list = mInductryService.getList(pageindex, Constant.PAGESIZE);
         PageBean bean = new PageBean(pageindex, Constant.PAGESIZE, mInductryInfoService.count(), list);
         if (iid != null) {
-            List<MInductryinfo> mInductryInfo = mInductryInfoService.selectByIid(iid);
-            model.addAttribute("mInductryInfoList", mInductryInfo);
+            List<MInductryinfo> mInductryInfoList = mInductryInfoService.selectByIid(iid);
+            model.addAttribute("mInductryInfoList", mInductryInfoList);
         } else {
             model.addAttribute("mInductryInfoList", null);
         }
@@ -51,6 +51,11 @@ public class InductryController {
     public String getById(Model model, Integer iiid) {
         model.addAttribute("config", configService.getConfig(Constant.CONFIGID));
         MInductryinfo mInductryinfo= mInductryInfoService.selectByIiid(iiid);
+        List<MInductry> list = mInductryService.getList(1, Constant.PAGESIZE);
+        PageBean bean = new PageBean(1, Constant.PAGESIZE, mInductryInfoService.count(), list);
+        List<MInductryinfo> mInductryInfoList = mInductryInfoService.selectByIid(mInductryinfo.getIid());
+        model.addAttribute("mInductryInfoList", mInductryInfoList);
+        model.addAttribute("pageData", bean);
         model.addAttribute("mInductryinfo",mInductryinfo);
         return "inductry.html";
     }

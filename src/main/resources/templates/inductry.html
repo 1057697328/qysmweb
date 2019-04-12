@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <!--suppress ALL -->
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
 <head th:include="header :: header('关于我们')">
 </head>
+
 <body>
 <header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
 <section id="inner-title" class="inner-title">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-lg-6"><h2>产业板块</h2></div>
+            <div class="col-md-6 col-lg-6">
+                <h2>产业板块</h2>
+            </div>
             <div class="col-md-6 col-lg-6">
                 <div class="breadcrumbs">
                     <ul>
@@ -34,10 +38,6 @@
                        th:onclick="'javascript:jumpPage(\''+${item?.iid}+'\');'">
                         <label th:text="${item?.iname}"></label>
                     </a>
-                    <!--<a href="#" class="list-group-item">产业板块名称</a>-->
-                    <!--<a href="#" class="list-group-item">产业板块名称</a>-->
-                    <!--<a href="#" class="list-group-item">产业板块名称</a>-->
-                    <!--<a href="#" class="list-group-item">产业板块名称</a>-->
                 </div>
 
             </div>
@@ -45,25 +45,24 @@
             <div class="col-md-9 col-sm-9 col-xs-9" th:if="${mInductryInfoList} ne null">
 
                 <ul class="nav nav-pills">
-                    <li role="presentation" class="active"
-                        th:each="item:${mInductryInfoList}">
+                    <li role="presentation" class="active" th:each="item:${mInductryInfoList}">
                         <a href="javaScript:void(0)" th:text="${item?.iiname}"
                            th:onclick="'javascript:getById(\''+${item?.iiid}+'\');'">产业信息名称</a>
                     </li>
-
-                    <!--<li role="presentation"><a href="#">产业信息名称</a></li>-->
-                    <!--<li role="presentation"><a href="#">产业信息名称</a></li>-->
                 </ul>
 
                 <div class="page-header">
-                    <h1 th:text="${mInductryInfo?.iiname}">产业信息名称</h1>
+                    <h1 th:text="${mInductryinfo?.iiname}">产业信息名称</h1>
                 </div>
 
-                <div th:utext="${mInductryInfo?.iidetail}" th:if="${mInductryInfo!=null}">
+                <script th:inline="javascript">
+                    console.log([[${mInductryinfo}]])
+                </script>
+                <div th:utext="${mInductryinfo?.iidetail}" th:if="${mInductryinfo!=null}">
                     <p>产业信息介绍内容.....</p>
                 </div>
 
-                <div th:if="${mInductryInfo==null}">
+                <div th:if="${mInductryinfo==null}">
                     <p>暂无产业信息介绍内容.....</p>
                 </div>
 
@@ -112,4 +111,5 @@
         window.location.href = "inductry_getById.html?iiid=" + iiid;
     }
 </script>
+
 </html>
