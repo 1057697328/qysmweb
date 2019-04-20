@@ -34,8 +34,19 @@ public class MQuestionController {
         if (qid != null) {
             MQuestion mQuestion = service.selectById(qid);
             model.addAttribute("mQuestion", mQuestion);
+            model.addAttribute("qid", mQuestion.getQid());
         } else {
-            model.addAttribute("mQuestion", null);
+            if (list.size()!=0) {
+                MQuestion info = list.get(0);
+
+                MQuestion mQuestion = service.selectById(info.getQid());
+                if (mQuestion!=null) {
+                    model.addAttribute("mQuestion", mQuestion);
+                    model.addAttribute("qid", mQuestion.getQid());
+                }else{
+                    model.addAttribute("mQuestion", null);
+                }
+            }
         }
         return "questionList.html";
     }

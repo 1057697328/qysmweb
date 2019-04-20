@@ -1,78 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:include="header :: header('科普答疑列表')">
 </head>
+
 <body>
-<header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
-<section class="inner-title" id="inner-title">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-lg-6">
-                <h2>科普答疑详情</h2>
-
-            </div>
-            <div class="col-md-6 col-lg-6">
-                <div class="breadcrumbs">
-                    <ul>
-                        <li>当前页</li>
-                        <li><a href="index.html">首页</a></li>
-                        <li><a href="expertDetails.html">科普答疑详情</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="section-margine">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-lg-4" style="height: auto;">
-                <ul class="list-group">
-
-                    <li class="list-group-item" th:each="item:${pageData.list}">
-                        <a href="javaScript:void(0)" th:onclick="'javascript:jumpPage(\''+${item?.qid}+'\');'"
-                           th:text="${item.qname}">
-                        </a>
-                    </li>
-                </ul>
-                <div class="col-12" style="text-align: center;">
-                    <a href="projectList.html">首页</a>
-                    <a th:href="@{'projectList.html?pageindex='+${pageData.prevpage}}"
-                       th:classappend="${pageData.pageindex==1}?'disabled':''" th:text="上一页"></a>
-                    <a th:href="@{'projectList.html?pageindex='+${pageData.nextpage}}"
-                       th:classappend="${pageData.nextpage==0 || pageData.nextpage==pageData.pageindex}?'disabled':''"
-                       th:text="下一页"></a>
-                    <a th:href="@{'projectList.html?pageindex='+${pageData.pagecount}}"
-                       th:text="尾页"></a>
+    <header th:include="navbar :: header(${config?.phone1},${config?.email1})"></header>
+    <section class="inner-title" id="inner-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    <h2>科普答疑详情</h2>
 
                 </div>
-            </div>
-            <div class="col-md-7 col-lg-7" style="height: auto" th:if="${mQuestion} ne null">
-                <div>
-                    <h3>详情</h3>
-                    <div th:utext="${mQuestion?.qanswer}">
-
+                <div class="col-md-6 col-lg-6">
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li>当前页</li>
+                            <li><a href="index.html">首页</a></li>
+                            <li><a href="expertDetails.html">科普答疑详情</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-</section>
-<section id="footer-top" class="footer-top" th:include="footer :: footer-top(${config},${bottomNews})"></section>
+    </section>
+    <section class="section-margine">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-4" style="height: auto;">
+                    <ul class="list-group">
 
-<section id="footer-bottom" class="footer-bottom" th:include="footer :: footer-bottom"></section>
+                        <li th:each="item:${pageData.list}" th:attr="class=${item?.qid==qid?'active':''}+' list-group-item'">
+                            <a href="javaScript:void(0)" th:onclick="'javascript:jumpPage(\''+${item?.qid}+'\');'" th:text="${item.qname}">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="col-12" style="text-align: center;">
+                        <a href="projectList.html">首页</a>
+                        <a th:href="@{'projectList.html?pageindex='+${pageData.prevpage}}" th:classappend="${pageData.pageindex==1}?'disabled':''" th:text="上一页"></a>
+                        <a th:href="@{'projectList.html?pageindex='+${pageData.nextpage}}" th:classappend="${pageData.nextpage==0 || pageData.nextpage==pageData.pageindex}?'disabled':''" th:text="下一页"></a>
+                        <a th:href="@{'projectList.html?pageindex='+${pageData.pagecount}}" th:text="尾页"></a>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.plugin.min.js"></script>
-<script src="js/jquery.isotope.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/bootstrap-dropdownhover.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/waypoints.min.js"></script>
-<script src="js/jquery.counterup.min.js"></script>
-<script src="js/main.js"></script>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-7" style="height: auto" th:if="${mQuestion} ne null">
+                    <div>
+                        <h3>详情</h3>
+                        <div th:utext="${mQuestion?.qanswer}">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section id="footer-top" class="footer-top" th:include="footer :: footer-top(${config},${bottomNews})"></section>
+
+    <section id="footer-bottom" class="footer-bottom" th:include="footer :: footer-bottom"></section>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.plugin.min.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/bootstrap-dropdownhover.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 <script th:inline="javascript">
@@ -80,4 +77,5 @@
         window.location.href = "questionList.html?qid=" + qid;
     }
 </script>
+
 </html>

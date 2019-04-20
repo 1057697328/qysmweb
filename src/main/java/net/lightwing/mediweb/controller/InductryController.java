@@ -37,12 +37,37 @@ public class InductryController {
         }
         List<MInductry> list = mInductryService.getList(pageindex, Constant.PAGESIZE);
         PageBean bean = new PageBean(pageindex, Constant.PAGESIZE, mInductryInfoService.count(), list);
-        if (iid != null) {
-            List<MInductryinfo> mInductryInfoList = mInductryInfoService.selectByIid(iid);
-            model.addAttribute("mInductryInfoList", mInductryInfoList);
+        if (iid == null) {
+            if (list.size() != 0) {
+                MInductry info = list.get(0);
+                List<MInductryinfo> mInductryInfoList = mInductryInfoService.selectByIid(info.getIid());
+                model.addAttribute("mInductryInfoList", mInductryInfoList);
+                model.addAttribute("iid", info.getIid());
+                if (mInductryInfoList.size() != 0) {
+                    MInductryinfo inductryinfo = mInductryInfoList.get(0);
+                    MInductryinfo mInductryinfo = mInductryInfoService.selectByIiid(inductryinfo.getIiid());
+                    model.addAttribute("mInductryinfo", mInductryinfo);
+                    model.addAttribute("iiid", inductryinfo.getIiid());
+                }
+            } else {
+                model.addAttribute("mInductryInfoList", null);
+                model.addAttribute("mInductryinfo", null);
+            }
+
         } else {
-            model.addAttribute("mInductryInfoList", null);
+            List<MInductryinfo> mInductryInfoList = mInductryInfoService.selectByIid(iid);
+            if (mInductryInfoList.size() != 0) {
+                model.addAttribute("mInductryInfoList", mInductryInfoList);
+                MInductryinfo im = mInductryInfoList.get(0);
+                model.addAttribute("iid", iid);
+                model.addAttribute("iiid", im.getIiid());
+            } else {
+                model.addAttribute("mInductryInfoList", null);
+            }
+            model.addAttribute("mInductryinfo", null);
+
         }
+
         model.addAttribute("pageData", bean);
         return "inductry.html";
     }
@@ -50,13 +75,16 @@ public class InductryController {
     @RequestMapping("inductry_getById.html")
     public String getById(Model model, Integer iiid) {
         model.addAttribute("config", configService.getConfig(Constant.CONFIGID));
-        MInductryinfo mInductryinfo= mInductryInfoService.selectByIiid(iiid);
+        MInductryinfo mInductryinfo = mInductryInfoService.selectByIiid(iiid);
         List<MInductry> list = mInductryService.getList(1, Constant.PAGESIZE);
+
         PageBean bean = new PageBean(1, Constant.PAGESIZE, mInductryInfoService.count(), list);
         List<MInductryinfo> mInductryInfoList = mInductryInfoService.selectByIid(mInductryinfo.getIid());
         model.addAttribute("mInductryInfoList", mInductryInfoList);
         model.addAttribute("pageData", bean);
-        model.addAttribute("mInductryinfo",mInductryinfo);
+        model.addAttribute("mInductryinfo", mInductryinfo);
+        model.addAttribute("iid", mInductryinfo.getIid());
+        model.addAttribute("iiid", iiid);
         return "inductry.html";
     }
 }
