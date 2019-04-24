@@ -42,9 +42,9 @@
                         <a href="#" data-filter="*" class="current">全部商品</a>/
                         <a href="#" th:each="gtype,gtypeStat:${typelist}" th:attr="data-filter='.'+${gtype.gtypeid}" th:text="${gtype.gtypename}"></a>
                     </div>
-                    <div class="">
+                    <div class="portfolioContainer">
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 text-center" th:classappend="${item.gtypeid}" th:each="item,itemStat:${list}">
-                            <a class="">
+                            <a th:href="@{'product_details.html?gid='+${item.gid}}">
                                 <img th:src="${item?.imgpath}" class="" th:alt="${item?.gname}">
                             </a>
                             <div style="text-align:left" class="col-md-12 col-xs-12 col-sm-12">

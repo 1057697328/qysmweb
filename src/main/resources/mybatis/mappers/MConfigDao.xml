@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.lightwing.mediweb.dao.MConfigDao">
-  <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MConfig">
+<mapper namespace="net.lightwing.qysmweb.dao.MConfigDao">
+  <resultMap id="BaseResultMap" type="net.lightwing.qysmweb.pojo.MConfig">
     <id column="cid" jdbcType="INTEGER" property="cid" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="phone1" jdbcType="VARCHAR" property="phone1" />
@@ -9,7 +9,7 @@
     <result column="email1" jdbcType="VARCHAR" property="email1" />
     <result column="bottomabout" jdbcType="VARCHAR" property="bottomabout" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.mediweb.pojo.MConfig">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.qysmweb.pojo.MConfig">
     <result column="aboutus" jdbcType="LONGVARCHAR" property="aboutus" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -76,7 +76,7 @@
   <sql id="Blob_Column_List">
     aboutus
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MConfigExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="net.lightwing.qysmweb.pojo.MConfigExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -100,7 +100,7 @@
       </if>
     </if>
   </select>
-  <select id="selectByExample" parameterType="net.lightwing.mediweb.pojo.MConfigExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="net.lightwing.qysmweb.pojo.MConfigExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -134,13 +134,13 @@
     delete from m_config
     where cid = #{cid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="net.lightwing.mediweb.pojo.MConfigExample">
+  <delete id="deleteByExample" parameterType="net.lightwing.qysmweb.pojo.MConfigExample">
     delete from m_config
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="cid" keyProperty="cid" parameterType="net.lightwing.mediweb.pojo.MConfig" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="cid" keyProperty="cid" parameterType="net.lightwing.qysmweb.pojo.MConfig" useGeneratedKeys="true">
     insert into m_config (address, phone1, phone2, 
       email1, bottomabout, aboutus
       )
@@ -148,7 +148,7 @@
       #{email1,jdbcType=VARCHAR}, #{bottomabout,jdbcType=VARCHAR}, #{aboutus,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="cid" keyProperty="cid" parameterType="net.lightwing.mediweb.pojo.MConfig" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="cid" keyProperty="cid" parameterType="net.lightwing.qysmweb.pojo.MConfig" useGeneratedKeys="true">
     insert into m_config
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="address != null">
@@ -191,7 +191,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.lightwing.mediweb.pojo.MConfigExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="net.lightwing.qysmweb.pojo.MConfigExample" resultType="java.lang.Long">
     select count(*) from m_config
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -251,7 +251,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MConfig">
+  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.qysmweb.pojo.MConfig">
     update m_config
     <set>
       <if test="address != null">
@@ -275,7 +275,7 @@
     </set>
     where cid = #{cid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MConfig">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.qysmweb.pojo.MConfig">
     update m_config
     set address = #{address,jdbcType=VARCHAR},
       phone1 = #{phone1,jdbcType=VARCHAR},
@@ -285,7 +285,7 @@
       aboutus = #{aboutus,jdbcType=LONGVARCHAR}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MConfig">
+  <update id="updateByPrimaryKey" parameterType="net.lightwing.qysmweb.pojo.MConfig">
     update m_config
     set address = #{address,jdbcType=VARCHAR},
       phone1 = #{phone1,jdbcType=VARCHAR},

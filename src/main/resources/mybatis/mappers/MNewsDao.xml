@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.lightwing.mediweb.dao.MNewsDao">
-  <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MNews">
+<mapper namespace="net.lightwing.qysmweb.dao.MNewsDao">
+  <resultMap id="BaseResultMap" type="net.lightwing.qysmweb.pojo.MNews">
     <id column="nid" jdbcType="INTEGER" property="nid" />
     <result column="ntitle" jdbcType="VARCHAR" property="ntitle" />
     <result column="createdate" jdbcType="DATE" property="createdate" />
@@ -10,21 +10,21 @@
   </resultMap>
 
 
-  <resultMap id="newsWithType" type="net.lightwing.mediweb.pojo.MNews">
+  <resultMap id="newsWithType" type="net.lightwing.qysmweb.pojo.MNews">
     <id column="nid" jdbcType="INTEGER" property="nid" />
     <result column="ntitle" jdbcType="VARCHAR" property="ntitle" />
     <result column="createdate" jdbcType="DATE" property="createdate" />
     <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
     <result column="ntypeid" jdbcType="INTEGER" property="ntypeid" />
     <result column="ndetail" jdbcType="LONGVARCHAR" property="ndetail" />
-    <association property="newstype" javaType="net.lightwing.mediweb.pojo.MNewstype">
+    <association property="newstype" javaType="net.lightwing.qysmweb.pojo.MNewstype">
       <id column="ntypeid" jdbcType="INTEGER" property="ntypeid" />
       <result column="ntypename" jdbcType="VARCHAR" property="ntypename" />
     </association>
 
   </resultMap>
 
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.mediweb.pojo.MNews">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.qysmweb.pojo.MNews">
     <result column="ndetail" jdbcType="LONGVARCHAR" property="ndetail" />
   </resultMap>
 
@@ -98,7 +98,7 @@
   <sql id="Blob_Column_List">
     ndetail
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MNewsExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="net.lightwing.qysmweb.pojo.MNewsExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -122,7 +122,7 @@
       </if>
     </if>
   </select>
-  <select id="selectByExample" parameterType="net.lightwing.mediweb.pojo.MNewsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="net.lightwing.qysmweb.pojo.MNewsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -156,19 +156,19 @@
     delete from m_news
     where nid = #{nid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="net.lightwing.mediweb.pojo.MNewsExample">
+  <delete id="deleteByExample" parameterType="net.lightwing.qysmweb.pojo.MNewsExample">
     delete from m_news
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="nid" keyProperty="nid" parameterType="net.lightwing.mediweb.pojo.MNews" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="nid" keyProperty="nid" parameterType="net.lightwing.qysmweb.pojo.MNews" useGeneratedKeys="true">
     insert into m_news (ntitle, createdate, imgpath, 
       ntypeid, ndetail)
     values (#{ntitle,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{imgpath,jdbcType=VARCHAR}, 
       #{ntypeid,jdbcType=INTEGER}, #{ndetail,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="nid" keyProperty="nid" parameterType="net.lightwing.mediweb.pojo.MNews" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="nid" keyProperty="nid" parameterType="net.lightwing.qysmweb.pojo.MNews" useGeneratedKeys="true">
     insert into m_news
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="ntitle != null">
@@ -205,13 +205,13 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.lightwing.mediweb.pojo.MNewsExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="net.lightwing.qysmweb.pojo.MNewsExample" resultType="java.lang.Long">
     select count(*) from m_news
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <select id="selectWithTypeSingle" resultType="net.lightwing.mediweb.pojo.MNews">
+  <select id="selectWithTypeSingle" resultType="net.lightwing.qysmweb.pojo.MNews">
     select * from m_news n inner join m_newstype nt on (n.ntypeid=nt.ntypeid)
     where n.nid=#{nid}
   </select>
@@ -264,7 +264,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MNews">
+  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.qysmweb.pojo.MNews">
     update m_news
     <set>
       <if test="ntitle != null">
@@ -285,7 +285,7 @@
     </set>
     where nid = #{nid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MNews">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.qysmweb.pojo.MNews">
     update m_news
     set ntitle = #{ntitle,jdbcType=VARCHAR},
       createdate = #{createdate,jdbcType=DATE},
@@ -294,7 +294,7 @@
       ndetail = #{ndetail,jdbcType=LONGVARCHAR}
     where nid = #{nid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MNews">
+  <update id="updateByPrimaryKey" parameterType="net.lightwing.qysmweb.pojo.MNews">
     update m_news
     set ntitle = #{ntitle,jdbcType=VARCHAR},
       createdate = #{createdate,jdbcType=DATE},

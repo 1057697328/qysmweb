@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.lightwing.mediweb.dao.MInductryinfoDao">
-    <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MInductryinfo">
+<mapper namespace="net.lightwing.qysmweb.dao.MInductryinfoDao">
+    <resultMap id="BaseResultMap" type="net.lightwing.qysmweb.pojo.MInductryinfo">
         <id column="iiid" jdbcType="INTEGER" property="iiid"/>
         <result column="iid" jdbcType="INTEGER" property="iid"/>
         <result column="iiname" jdbcType="VARCHAR" property="iiname"/>
         <association property="mInductry" column="iid" select="queryMInductry"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.mediweb.pojo.MInductryinfo">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.qysmweb.pojo.MInductryinfo">
         <result column="iidetail" jdbcType="LONGVARCHAR" property="iidetail"/>
     </resultMap>
 
-    <resultMap id="MInductryMap" type="net.lightwing.mediweb.pojo.MInductry">
+    <resultMap id="MInductryMap" type="net.lightwing.qysmweb.pojo.MInductry">
         <id column="iid" jdbcType="INTEGER" property="iid"/>
         <result column="iname" jdbcType="VARCHAR" property="iname"/>
         <result column="idesc" jdbcType="VARCHAR" property="idesc"/>
@@ -40,7 +40,7 @@
     delete from m_inductryinfo
     where iiid = #{iiid,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" keyColumn="iiid" keyProperty="iiid" parameterType="net.lightwing.mediweb.pojo.MInductryinfo"
+    <insert id="insert" keyColumn="iiid" keyProperty="iiid" parameterType="net.lightwing.qysmweb.pojo.MInductryinfo"
             useGeneratedKeys="true">
     insert into m_inductryinfo (iid, iiname, iidetail
       )
@@ -48,7 +48,7 @@
       )
   </insert>
     <insert id="insertSelective" keyColumn="iiid" keyProperty="iiid"
-            parameterType="net.lightwing.mediweb.pojo.MInductryinfo" useGeneratedKeys="true">
+            parameterType="net.lightwing.qysmweb.pojo.MInductryinfo" useGeneratedKeys="true">
         insert into m_inductryinfo
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="iid != null">
@@ -73,7 +73,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MInductryinfo">
+    <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.qysmweb.pojo.MInductryinfo">
         update m_inductryinfo
         <set>
             <if test="iid != null">
@@ -88,14 +88,14 @@
         </set>
         where iiid = #{iiid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MInductryinfo">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.qysmweb.pojo.MInductryinfo">
     update m_inductryinfo
     set iid = #{iid,jdbcType=INTEGER},
       iiname = #{iiname,jdbcType=VARCHAR},
       iidetail = #{iidetail,jdbcType=LONGVARCHAR}
     where iiid = #{iiid,jdbcType=INTEGER}
   </update>
-    <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MInductryinfo">
+    <update id="updateByPrimaryKey" parameterType="net.lightwing.qysmweb.pojo.MInductryinfo">
     update m_inductryinfo
     set iid = #{iid,jdbcType=INTEGER},
       iiname = #{iiname,jdbcType=VARCHAR}
@@ -105,7 +105,7 @@
     <select id="queryMInductry" resultMap="MInductryMap">
         select * from m_inductry where iid=#{iid};
     </select>
-    <select id="selectById" resultType="net.lightwing.mediweb.pojo.MInductryinfo">
+    <select id="selectById" resultType="net.lightwing.qysmweb.pojo.MInductryinfo">
         select * from m_inductryinfo where iiid = #{iiid};
     </select>
 </mapper>

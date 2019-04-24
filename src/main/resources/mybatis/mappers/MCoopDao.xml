@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.lightwing.mediweb.dao.MCoopDao">
-    <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MCoop">
+<mapper namespace="net.lightwing.qysmweb.dao.MCoopDao">
+    <resultMap id="BaseResultMap" type="net.lightwing.qysmweb.pojo.MCoop">
         <id column="coid" jdbcType="INTEGER" property="coid"/>
         <result column="coname" jdbcType="VARCHAR" property="coname"/>
         <result column="imgpath" jdbcType="VARCHAR" property="imgpath"/>
@@ -26,14 +26,14 @@
     delete from m_coop
     where coid = #{coid,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" keyColumn="coid" keyProperty="coid" parameterType="net.lightwing.mediweb.pojo.MCoop"
+    <insert id="insert" keyColumn="coid" keyProperty="coid" parameterType="net.lightwing.qysmweb.pojo.MCoop"
             useGeneratedKeys="true">
     insert into m_coop (coname, imgpath, weburl
       )
     values (#{coname,jdbcType=VARCHAR}, #{imgpath,jdbcType=VARCHAR}, #{weburl,jdbcType=VARCHAR}
       )
   </insert>
-    <insert id="insertSelective" keyColumn="coid" keyProperty="coid" parameterType="net.lightwing.mediweb.pojo.MCoop"
+    <insert id="insertSelective" keyColumn="coid" keyProperty="coid" parameterType="net.lightwing.qysmweb.pojo.MCoop"
             useGeneratedKeys="true">
         insert into m_coop
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -59,7 +59,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MCoop">
+    <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.qysmweb.pojo.MCoop">
         update m_coop
         <set>
             <if test="coname != null">
@@ -74,7 +74,7 @@
         </set>
         where coid = #{coid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MCoop">
+    <update id="updateByPrimaryKey" parameterType="net.lightwing.qysmweb.pojo.MCoop">
     update m_coop
     set coname = #{coname,jdbcType=VARCHAR},
       imgpath = #{imgpath,jdbcType=VARCHAR},

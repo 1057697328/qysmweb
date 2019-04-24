@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.lightwing.mediweb.dao.MContactDao">
-  <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MContact">
+<mapper namespace="net.lightwing.qysmweb.dao.MContactDao">
+  <resultMap id="BaseResultMap" type="net.lightwing.qysmweb.pojo.MContact">
     <id column="cid" jdbcType="INTEGER" property="cid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     cid, `name`, phone, subject, message, subtime
   </sql>
-  <select id="selectByExample" parameterType="net.lightwing.mediweb.pojo.MContactExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="net.lightwing.qysmweb.pojo.MContactExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -102,19 +102,19 @@
     delete from m_contact
     where cid = #{cid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="net.lightwing.mediweb.pojo.MContactExample">
+  <delete id="deleteByExample" parameterType="net.lightwing.qysmweb.pojo.MContactExample">
     delete from m_contact
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="cid" keyProperty="cid" parameterType="net.lightwing.mediweb.pojo.MContact" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="cid" keyProperty="cid" parameterType="net.lightwing.qysmweb.pojo.MContact" useGeneratedKeys="true">
     insert into m_contact (`name`, phone, subject, 
       message, subtime)
     values (#{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
       #{message,jdbcType=VARCHAR}, #{subtime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="cid" keyProperty="cid" parameterType="net.lightwing.mediweb.pojo.MContact" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="cid" keyProperty="cid" parameterType="net.lightwing.qysmweb.pojo.MContact" useGeneratedKeys="true">
     insert into m_contact
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
@@ -151,7 +151,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.lightwing.mediweb.pojo.MContactExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="net.lightwing.qysmweb.pojo.MContactExample" resultType="java.lang.Long">
     select count(*) from m_contact
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -195,7 +195,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MContact">
+  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.qysmweb.pojo.MContact">
     update m_contact
     <set>
       <if test="name != null">
@@ -216,7 +216,7 @@
     </set>
     where cid = #{cid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MContact">
+  <update id="updateByPrimaryKey" parameterType="net.lightwing.qysmweb.pojo.MContact">
     update m_contact
     set `name` = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},

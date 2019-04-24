@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>net.lightwing</groupId>
-    <artifactId>mediweb</artifactId>
+    <artifactId>qysmweb</artifactId>
     <version>1.0.0-RELEASE</version>
     <name>mediweb</name>
     <description>长沙轻翼网络科技有限公司_开发</description>

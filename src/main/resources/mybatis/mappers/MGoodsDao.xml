@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.lightwing.mediweb.dao.MGoodsDao">
-  <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MGoods">
+<mapper namespace="net.lightwing.qysmweb.dao.MGoodsDao">
+  <resultMap id="BaseResultMap" type="net.lightwing.qysmweb.pojo.MGoods">
     <id column="gid" jdbcType="INTEGER" property="gid" />
     <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
     <result column="gname" jdbcType="VARCHAR" property="gname" />
@@ -10,14 +10,14 @@
     <result column="price" jdbcType="DOUBLE" property="price" />
   </resultMap>
 
-  <resultMap id="goodsWithType" type="net.lightwing.mediweb.pojo.MGoods">
+  <resultMap id="goodsWithType" type="net.lightwing.qysmweb.pojo.MGoods">
     <id column="gid" jdbcType="INTEGER" property="gid" />
     <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
     <result column="gname" jdbcType="VARCHAR" property="gname" />
     <result column="buypath" jdbcType="VARCHAR" property="buypath" />
     <result column="gtypeid" jdbcType="INTEGER" property="gtypeid" />
     <result column="price" jdbcType="DOUBLE" property="price" />
-    <association property="goodtype" javaType="net.lightwing.mediweb.pojo.MGoodtype">
+    <association property="goodtype" javaType="net.lightwing.qysmweb.pojo.MGoodtype">
       <id column="gtypeid" jdbcType="INTEGER" property="gtypeid" />
       <result column="gtypename" jdbcType="VARCHAR" property="gtypename" />
       <result column="gtypedesc" jdbcType="VARCHAR" property="gtypedesc" />
@@ -83,9 +83,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    gid, imgpath, gname, buypath, gtypeid, price
+    gid, imgpath, gname, buypath, gtypeid, price, details
   </sql>
-  <select id="selectByExample" parameterType="net.lightwing.mediweb.pojo.MGoodsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="net.lightwing.qysmweb.pojo.MGoodsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -117,19 +117,19 @@
     delete from m_goods
     where gid = #{gid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="net.lightwing.mediweb.pojo.MGoodsExample">
+  <delete id="deleteByExample" parameterType="net.lightwing.qysmweb.pojo.MGoodsExample">
     delete from m_goods
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="gid" keyProperty="gid" parameterType="net.lightwing.mediweb.pojo.MGoods" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="gid" keyProperty="gid" parameterType="net.lightwing.qysmweb.pojo.MGoods" useGeneratedKeys="true">
     insert into m_goods (imgpath, gname, buypath, 
       gtypeid, price)
     values (#{imgpath,jdbcType=VARCHAR}, #{gname,jdbcType=VARCHAR}, #{buypath,jdbcType=VARCHAR}, 
       #{gtypeid,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" keyColumn="gid" keyProperty="gid" parameterType="net.lightwing.mediweb.pojo.MGoods" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="gid" keyProperty="gid" parameterType="net.lightwing.qysmweb.pojo.MGoods" useGeneratedKeys="true">
     insert into m_goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="imgpath != null">
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.lightwing.mediweb.pojo.MGoodsExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="net.lightwing.qysmweb.pojo.MGoodsExample" resultType="java.lang.Long">
     select count(*) from m_goods
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -210,7 +210,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MGoods">
+  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.qysmweb.pojo.MGoods">
     update m_goods
     <set>
       <if test="imgpath != null">
@@ -231,7 +231,7 @@
     </set>
     where gid = #{gid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MGoods">
+  <update id="updateByPrimaryKey" parameterType="net.lightwing.qysmweb.pojo.MGoods">
     update m_goods
     set imgpath = #{imgpath,jdbcType=VARCHAR},
       gname = #{gname,jdbcType=VARCHAR},

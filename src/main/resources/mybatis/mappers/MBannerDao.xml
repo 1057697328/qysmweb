@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.lightwing.mediweb.dao.MBannerDao">
-  <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MBanner">
+<mapper namespace="net.lightwing.qysmweb.dao.MBannerDao">
+  <resultMap id="BaseResultMap" type="net.lightwing.qysmweb.pojo.MBanner">
     <id column="bid" jdbcType="INTEGER" property="bid" />
     <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
     <result column="smalltitle" jdbcType="VARCHAR" property="smalltitle" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     bid, imgpath, smalltitle, bigtitle, showbtn, btntext, btnhref
   </sql>
-  <select id="selectByExample" parameterType="net.lightwing.mediweb.pojo.MBannerExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="net.lightwing.qysmweb.pojo.MBannerExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -103,13 +103,13 @@
     delete from m_banner
     where bid = #{bid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="net.lightwing.mediweb.pojo.MBannerExample">
+  <delete id="deleteByExample" parameterType="net.lightwing.qysmweb.pojo.MBannerExample">
     delete from m_banner
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="bid" keyProperty="bid" parameterType="net.lightwing.mediweb.pojo.MBanner" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="bid" keyProperty="bid" parameterType="net.lightwing.qysmweb.pojo.MBanner" useGeneratedKeys="true">
     insert into m_banner (imgpath, smalltitle, bigtitle, 
       showbtn, btntext, btnhref
       )
@@ -117,7 +117,7 @@
       #{showbtn,jdbcType=INTEGER}, #{btntext,jdbcType=VARCHAR}, #{btnhref,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="bid" keyProperty="bid" parameterType="net.lightwing.mediweb.pojo.MBanner" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="bid" keyProperty="bid" parameterType="net.lightwing.qysmweb.pojo.MBanner" useGeneratedKeys="true">
     insert into m_banner
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="imgpath != null">
@@ -160,7 +160,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.lightwing.mediweb.pojo.MBannerExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="net.lightwing.qysmweb.pojo.MBannerExample" resultType="java.lang.Long">
     select count(*) from m_banner
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -208,7 +208,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MBanner">
+  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.qysmweb.pojo.MBanner">
     update m_banner
     <set>
       <if test="imgpath != null">
@@ -232,7 +232,7 @@
     </set>
     where bid = #{bid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MBanner">
+  <update id="updateByPrimaryKey" parameterType="net.lightwing.qysmweb.pojo.MBanner">
     update m_banner
     set imgpath = #{imgpath,jdbcType=VARCHAR},
       smalltitle = #{smalltitle,jdbcType=VARCHAR},

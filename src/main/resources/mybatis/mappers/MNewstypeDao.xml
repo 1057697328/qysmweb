@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.lightwing.mediweb.dao.MNewstypeDao">
-  <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MNewstype">
+<mapper namespace="net.lightwing.qysmweb.dao.MNewstypeDao">
+  <resultMap id="BaseResultMap" type="net.lightwing.qysmweb.pojo.MNewstype">
     <id column="ntypeid" jdbcType="INTEGER" property="ntypeid" />
     <result column="ntypename" jdbcType="VARCHAR" property="ntypename" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List">
     ntypeid, ntypename
   </sql>
-  <select id="selectByExample" parameterType="net.lightwing.mediweb.pojo.MNewstypeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="net.lightwing.qysmweb.pojo.MNewstypeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -98,17 +98,17 @@
     delete from m_newstype
     where ntypeid = #{ntypeid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="net.lightwing.mediweb.pojo.MNewstypeExample">
+  <delete id="deleteByExample" parameterType="net.lightwing.qysmweb.pojo.MNewstypeExample">
     delete from m_newstype
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="ntypeid" keyProperty="ntypeid" parameterType="net.lightwing.mediweb.pojo.MNewstype" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="ntypeid" keyProperty="ntypeid" parameterType="net.lightwing.qysmweb.pojo.MNewstype" useGeneratedKeys="true">
     insert into m_newstype (ntypename)
     values (#{ntypename,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="ntypeid" keyProperty="ntypeid" parameterType="net.lightwing.mediweb.pojo.MNewstype" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="ntypeid" keyProperty="ntypeid" parameterType="net.lightwing.qysmweb.pojo.MNewstype" useGeneratedKeys="true">
     insert into m_newstype
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="ntypename != null">
@@ -121,7 +121,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.lightwing.mediweb.pojo.MNewstypeExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="net.lightwing.qysmweb.pojo.MNewstypeExample" resultType="java.lang.Long">
     select count(*) from m_newstype
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -149,7 +149,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MNewstype">
+  <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.qysmweb.pojo.MNewstype">
     update m_newstype
     <set>
       <if test="ntypename != null">
@@ -158,7 +158,7 @@
     </set>
     where ntypeid = #{ntypeid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MNewstype">
+  <update id="updateByPrimaryKey" parameterType="net.lightwing.qysmweb.pojo.MNewstype">
     update m_newstype
     set ntypename = #{ntypename,jdbcType=VARCHAR}
     where ntypeid = #{ntypeid,jdbcType=INTEGER}

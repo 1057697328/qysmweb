@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.lightwing.mediweb.dao.MDoctorDao">
-    <resultMap id="BaseResultMap" type="net.lightwing.mediweb.pojo.MDoctor">
+<mapper namespace="net.lightwing.qysmweb.dao.MDoctorDao">
+    <resultMap id="BaseResultMap" type="net.lightwing.qysmweb.pojo.MDoctor">
         <id column="did" jdbcType="INTEGER" property="did"/>
         <result column="dname" jdbcType="VARCHAR" property="dname"/>
         <result column="djob" jdbcType="VARCHAR" property="djob"/>
         <result column="imgpath" jdbcType="VARCHAR" property="imgpath"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.mediweb.pojo.MDoctor">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.qysmweb.pojo.MDoctor">
         <result column="ddesc" jdbcType="LONGVARCHAR" property="ddesc"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -34,14 +34,14 @@
     delete from m_doctor
     where did = #{did,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" keyColumn="did" keyProperty="did" parameterType="net.lightwing.mediweb.pojo.MDoctor"
+    <insert id="insert" keyColumn="did" keyProperty="did" parameterType="net.lightwing.qysmweb.pojo.MDoctor"
             useGeneratedKeys="true">
     insert into m_doctor (dname, djob, imgpath, 
       ddesc)
     values (#{dname,jdbcType=VARCHAR}, #{djob,jdbcType=VARCHAR}, #{imgpath,jdbcType=VARCHAR}, 
       #{ddesc,jdbcType=LONGVARCHAR})
   </insert>
-    <insert id="insertSelective" keyColumn="did" keyProperty="did" parameterType="net.lightwing.mediweb.pojo.MDoctor"
+    <insert id="insertSelective" keyColumn="did" keyProperty="did" parameterType="net.lightwing.qysmweb.pojo.MDoctor"
             useGeneratedKeys="true">
         insert into m_doctor
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -73,7 +73,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.mediweb.pojo.MDoctor">
+    <update id="updateByPrimaryKeySelective" parameterType="net.lightwing.qysmweb.pojo.MDoctor">
         update m_doctor
         <set>
             <if test="dname != null">
@@ -91,7 +91,7 @@
         </set>
         where did = #{did,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.mediweb.pojo.MDoctor">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lightwing.qysmweb.pojo.MDoctor">
     update m_doctor
     set dname = #{dname,jdbcType=VARCHAR},
       djob = #{djob,jdbcType=VARCHAR},
@@ -99,7 +99,7 @@
       ddesc = #{ddesc,jdbcType=LONGVARCHAR}
     where did = #{did,jdbcType=INTEGER}
   </update>
-    <update id="updateByPrimaryKey" parameterType="net.lightwing.mediweb.pojo.MDoctor">
+    <update id="updateByPrimaryKey" parameterType="net.lightwing.qysmweb.pojo.MDoctor">
     update m_doctor
     set dname = #{dname,jdbcType=VARCHAR},
       djob = #{djob,jdbcType=VARCHAR},
